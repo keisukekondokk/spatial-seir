@@ -1,0 +1,101 @@
+---
+title: "Simulating the Impacts of Interregional Mobility Restriction on Spatial Spread of COVID-19 in Japan"
+author: "Kondo Keisuke"
+date: "2020/12/21"
+output: html_document
+---
+
+```{r knitr_option, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE, results="hide")
+```
+
+```{r include_packages}
+#GRAPH
+library(ggplot2)
+library(ggrepel)
+library(scales)
+#Dataframe
+library(tidyverse)
+library(rlist)
+library(readxl)
+#Loop
+library(parallel)
+library(doParallel)
+library(foreach)
+#Shapefile
+library(sf)
+library(tmap)
+```
+
+```{r setting_parameters}
+#-----------------------------------
+#Choose Case Scenario (1L to 6L)
+numCaseScenario <- 1L
+#-----------------------------------
+
+#Basic Reproduction Number
+R0 <- 2.6
+#Average Incubation Period (day)
+l_epsilon <- 5
+#Average Infectious Period (day)
+l_gamma <- 10
+#Incubation Rate
+epsilon <- 1 / l_epsilon
+#Recovery Rate
+gamma <- 1 / l_gamma
+#Transmission Rate
+beta0 <- R0 * gamma
+#NPIs Degree
+listFiles <- list.files("data/parameter", pattern = ".csv", full.names = TRUE)
+listAlpha <- lapply(listFiles, read_csv)
+```
+
+```{r setting_date}
+#Date Setting for Simulation
+source("r/spatial_seir_set_date.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+```
+
+```{r make_folders_to_store_results}
+#Make Folders to Store Results
+source("r/spatial_seir_make_folders_to_store_results.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+```
+
+```{r make_dataset}
+#Load and Make Dataset for Simulation
+source("r/spatial_seir_load_data.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_data.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+```
+
+```{r do_simulation}
+#Call Function
+source("r/spatial_seir_function_simulation.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+
+#Do Simulation
+listSimulationCaseScenario <- list(c(1, numCaseScenario), c(2, numCaseScenario))
+listSimulationResults <- mclapply(listSimulationCaseScenario, fSimulation)
+
+#Save Results
+source("r/spatial_seir_save_results.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+```
+
+```{r make_figure}
+#Set DataFrame from Simulation Results
+dfResultsLong1 <- listSimulationResults[[1]]
+dfResultsLong2 <- listSimulationResults[[2]]
+
+#Set End Day in Figure
+#endDayFigure <- as.Date("2022-03-31", "%Y-%m-%d")
+endDayFigure <- endDay
+
+#Make Figures
+source("r/spatial_seir_make_figure_I.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_figure_dI.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_figure_E.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_figure_S.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_figure_R.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_figure_ratio.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_figure_beta.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_figure_alpha.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+```
+
+
