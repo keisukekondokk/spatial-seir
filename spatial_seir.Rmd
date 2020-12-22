@@ -30,7 +30,7 @@ library(tmap)
 ```{r setting_parameters}
 #-----------------------------------
 #Choose Case Scenario (1L to 6L)
-numCaseScenario <- 1L
+numCaseScenario <- 6L
 #-----------------------------------
 
 #Basic Reproduction Number
@@ -98,4 +98,18 @@ source("r/spatial_seir_make_figure_beta.R", echo = TRUE, prompt.echo = "", space
 source("r/spatial_seir_make_figure_alpha.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 ```
 
+
+```{r make_figure}
+#Set DataFrame from Simulation Results
+dfResultsLong1 <- listSimulationResults[[1]]
+dfResultsLong2 <- listSimulationResults[[2]]
+
+#Set End Day in Figure
+#endDayFigure <- as.Date("2022-03-31", "%Y-%m-%d")
+endDayFigure <- endDay
+
+#Make Figures
+source("r/spatial_seir_make_figure_I_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_figure_ratio_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+```
 

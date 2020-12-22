@@ -53,11 +53,11 @@ foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel")) %dopar
   #ggplot2
   ggplot() +
     geom_line(aes(x = date, y = Ratio, color = labelLine2),
-              size = 1.6, 
+              size = 1.3, 
               linetype = "solid",
               data = dfTemp2) +
     geom_line(aes(x = date, y = Ratio, color = labelLine1), 
-              size = 1.4, 
+              size = 1.2, 
               linetype = "solid",
               data = dfTemp1) +
     geom_point(aes(x = date-1, y = 1), data = dfTemp3, size = 2, shape = 22, fill="transparent", stroke = 2, color = "red") +
@@ -66,7 +66,7 @@ foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel")) %dopar
     scale_y_continuous(limits=c(round(min(dfTemp1$Ratio),2), round(max(dfTemp1$Ratio),2)), labels = comma_format(accuracy = .01)) +
     scale_x_date(date_breaks = "3 months",
                  date_labels = "%Y\n%m-%d") + 
-    ylab("Ratio of force of infection\nin the daytime and nighttime") +
+    ylab("Ratio of daytime and\nnighttime force of infection") +
     xlab("") +
     theme_bw() +
     theme(legend.title=element_blank(),
