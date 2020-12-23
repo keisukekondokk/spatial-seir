@@ -42,7 +42,7 @@ foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel")) %dopar
     labelLine0 <- "Observed numbers"
     labelLine1 <- "Simulated numbers from SEIR model \nwith interregional mobility except Tokyo"
     labelLine2 <- "Simulated numbers from SEIR model\nwith interregional mobility"
-    colorLine <- c("#20b2aa", "#f45b5b")
+    colorLine <- c("#483d8b", "#f45b5b")
   } else{
     labelLine0 <- "Observed numbers"
     labelLine1 <- "Simulated numbers from SEIR model\nwith interregional mobility"

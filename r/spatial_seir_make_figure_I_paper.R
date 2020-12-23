@@ -51,9 +51,9 @@ foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "string
   if(numCaseScenario == 6){
     #
     labelLine0 <- "Observed\nnumbers"
-    labelLine1 <- "SEIR model with\ninterregional mobility\nexcept Tokyo"
+    labelLine1 <- "SEIR model with \ninterregional mobility\nexcept Tokyo" #space is necessary after with
     labelLine2 <- "SEIR model with\ninterregional mobility"
-    colorLine <- c("#2f7ed8", "#20b2aa", "#f45b5b")
+    colorLine <- c("#2f7ed8", "#483d8b", "#f45b5b")
   } else{
     labelLine0 <- "Observed\nnumbers"
     labelLine1 <- "SEIR model with\ninterregional mobility"
