@@ -12,7 +12,7 @@ Run the R Markdown file [`spatial_seir.Rmd`](./spatial_seir.Rmd). Packages used 
 Open the [`data/parameter`](/data/parameter) directory. There are CSV files that determine the degrees of non-pharmaceutical interventions. 
 
 ### How to Customize Origin-Destination Matrix
-Open the R script [`spatial_seir_function_simulation.R`](/r/spatial_seir_function_simulation.R) in the [`r`](/r) directory. Lines 15-49 determines the daily OD matrix used in each scenario. 
+Open the R script [`spatial_seir_function_simulation.R`](/r/spatial_seir_function_simulation.R) in the [`r`](/r) directory. Lines 15-49 determine the daily OD matrix used in each scenario. 
 
 ## Shiny Web Application
 The numerical simulations conducted in this study are provide on the web site “COVID-19 Simulator in Japan,” which I developed as a Shiny Application.  
