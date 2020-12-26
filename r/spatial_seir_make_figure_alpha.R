@@ -52,7 +52,7 @@ foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel")) %dopar
   
   #ggplot2
   ggplot() +
-    geom_hline(yintercept = 1/R0, linetype="dashed", color = "red") +
+    geom_hline(yintercept = 1/R0, linetype="dashed") +
     geom_line(aes(x = date, y = Alpha),
               size = 1.3, 
               linetype = "solid",

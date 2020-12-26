@@ -70,15 +70,15 @@ fSimulation <- function(vX) {
     vdE <- -vdS - epsilon*mE[t,]
     vdI <- epsilon*mE[t,] - gamma*mI[t,]
     vdR <- gamma*mI[t,]
-    vRatio <- matrix((t(mC) %*% mI[t, ] / t(mC) %*% vN) / (t(mIdentity) %*% mI[t, ] / t(mIdentity) %*% vN), region, 1, byrow = FALSE)
-    
+    vRatioLambda <- matrix((t(mC) %*% mI[t, ] / t(mC) %*% vN) / (t(mIdentity) %*% mI[t, ] / t(mIdentity) %*% vN), region, 1, byrow = FALSE)
+
     #Store Results
     mS[t+1,] <- mS[t,] + vdS
     mE[t+1,] <- mE[t,] + vdE
     mI[t+1,] <- mI[t,] + vdI
     mdI[t,] <- epsilon*mE[t,]
     mR[t+1,] <- mR[t,] + vdR
-    mRatio[t,] <- vRatio
+    mRatioLambda[t,] <- vRatioLambda
     mBeta[t,] <- beta
   }  
   #LOOP END------------------------------------------------
@@ -128,7 +128,7 @@ fSimulation <- function(vX) {
   #Force of infection
   dfSimulationResultsAdd <- dfTime %>%
     dplyr::bind_cols(as_tibble(mBeta)) %>%
-    dplyr::bind_cols(as_tibble(mRatio)) %>%
+    dplyr::bind_cols(as_tibble(mRatioLambda)) %>%
     dplyr::filter(rownumberPost > 1) %>%
     dplyr::left_join(dfSnapShotTime, by = "rownumberPost") %>%
     dplyr::select(-rownumberPost) %>%
@@ -138,7 +138,7 @@ fSimulation <- function(vX) {
   dfLongAdd <- dfSimulationResultsAdd %>%
     tidyr::pivot_longer(-c(numDays, date, date_year, date_month, date_day, date_holiday),
                         names_to = c(".value", "prefCode"), 
-                        names_pattern = "(Beta|Ratio)(.*)") %>%
+                        names_pattern = "(Beta|RatioLambda)(.*)") %>%
     dplyr::mutate(prefCode = as.numeric(prefCode)) %>%
     dplyr::arrange(prefCode, date)
   
@@ -157,9 +157,9 @@ fSimulation <- function(vX) {
   
   #Merge Dataframe 
   dfResultsLong <- dfResultsLong %>%
-    dplyr::left_join(dfLongAdd %>% select(date, prefCode, Beta, Ratio), by = c("date" = "date", "prefCode" = "prefCode")) %>%
+    dplyr::left_join(dfLongAdd %>% select(date, prefCode, Beta, RatioLambda), by = c("date" = "date", "prefCode" = "prefCode")) %>%
     dplyr::mutate(Beta = if_else(prefCode == 0 & date >= startDay, NA_real_, Beta)) %>%
-    dplyr::mutate(Ratio = if_else(prefCode == 0 & date >= startDay, 1, Ratio)) %>%
+    dplyr::mutate(RatioLambda = if_else(prefCode == 0 & date >= startDay, 1, RatioLambda)) %>%
     dplyr::filter(!is.na(date))
   
   #Return Results as Datafame

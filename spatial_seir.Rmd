@@ -11,20 +11,21 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE, results="hide")
 
 ```{r include_packages}
 #GRAPH
-library(ggplot2)
-library(ggrepel)
-library(scales)
+if(!require(ggplot2)) install.packages("ggplot2")
+if(!require(ggrepel)) install.packages("ggrepel")
+if(!require(scales)) install.packages("scales")
 #Dataframe
-library(tidyverse)
-library(rlist)
-library(readxl)
+if(!require(tidyverse)) install.packages("tidyverse")
+if(!require(rlist)) install.packages("rlist")
+if(!require(readxl)) install.packages("readxl")
 #Loop
-library(parallel)
-library(doParallel)
-library(foreach)
+if(!require(parallel)) install.packages("parallel")
+if(!require(doParallel)) install.packages("doParallel")
+if(!require(foreach)) install.packages("foreach")
 #Shapefile
-library(sf)
-library(tmap)
+if(!require(sf)) install.packages("sf")
+#Map Visualization
+if(!require(tmap)) install.packages("tmap")
 ```
 
 ```{r setting_parameters}
@@ -93,9 +94,10 @@ source("r/spatial_seir_make_figure_dI.R", echo = TRUE, prompt.echo = "", spaced 
 source("r/spatial_seir_make_figure_E.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 source("r/spatial_seir_make_figure_S.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 source("r/spatial_seir_make_figure_R.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
-source("r/spatial_seir_make_figure_ratio.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_figure_ratiolambda.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 source("r/spatial_seir_make_figure_beta.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 source("r/spatial_seir_make_figure_alpha.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_figure_gapI.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 ```
 
 
@@ -110,6 +112,6 @@ endDayFigure <- endDay
 
 #Make Figures
 source("r/spatial_seir_make_figure_I_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
-source("r/spatial_seir_make_figure_ratio_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_figure_ratiolambda_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 ```
 
