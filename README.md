@@ -43,5 +43,5 @@ Email: kondo-keisuke@rieti.go.jp
 URL: https://sites.google.com/site/keisukekondokk/  
 
 ## Reference
-Kondo, Keisuke (2020) "Simulating the Impacts of Interregional Mobility Restriction on Spatial Spread of COVID-19 in Japan," RIETI Discussion Paper (forthcoming)  
-https://www.rieti.go.jp/  
+Kondo, Keisuke (2020) "Simulating the Impacts of Interregional Mobility Restriction on the Spatial Spread of COVID-19 in Japan," RIETI Discussion Paper No. 20-E-089  
+URL: https://www.rieti.go.jp/en/publications/summary/20120005.html  
