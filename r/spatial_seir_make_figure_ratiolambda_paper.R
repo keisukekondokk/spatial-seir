@@ -67,6 +67,7 @@ foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "string
   }
     
   #ggplot2
+  localeOriginal <- Sys.getlocale("LC_CTYPE")
   Sys.setlocale("LC_ALL","English")
   ggplot() +
     geom_line(aes(x = date, y = RatioLambda, color = labelLine2),
@@ -101,6 +102,7 @@ foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "string
   #Save
   ggsave(file = saveFileNamePng, dpi = 200, width = 6, height = 4)
   ggsave(file = saveFileNameEps, dpi = 200, width = 6, height = 4)
+  #
+  Sys.setlocale("LC_ALL", localeOriginal)
 }
-Sys.setlocale("LC_ALL", "Japanese")
 parallel::stopCluster(cl)

@@ -73,6 +73,7 @@ foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "string
   }
     
   #ggplot2
+  localeOriginal <- Sys.getlocale("LC_CTYPE")
   Sys.setlocale("LC_ALL","English")
   listPlot[[i+1]] <- ggplot() +
     geom_line(aes(x = date, y = I, color = labelLine0),
@@ -111,6 +112,7 @@ foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "string
   #Save
   ggsave(file = saveFileNamePng, plot = listPlot[[i+1]], dpi = 200, width = 6, height = 4)
   ggsave(file = saveFileNameEps, plot = listPlot[[i+1]], dpi = 200, width = 6, height = 4)
+  #
+  Sys.setlocale("LC_ALL", localeOriginal)
 }
-Sys.setlocale("LC_ALL", "Japanese")
 parallel::stopCluster(cl)
