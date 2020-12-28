@@ -26,4 +26,8 @@ for(i in 1:6){
   if(!dir.exists(dirname)){
     dir.create(dirname)
   }
-}  
+}
+dirname = "output/fig/paper"
+if(!dir.exists(dirname)){
+  dir.create(dirname)
+}

@@ -6,14 +6,18 @@ output: html_document
 ---
 
 ```{r knitr_option, include=FALSE}
-knitr::opts_chunk$set(message=FALSE, warning=FALSE, results="hide")
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
 ```
 
 ```{r include_packages}
+#Github
+if(!require(devtools)) install.packages("devtools")
 #GRAPH
 if(!require(ggplot2)) install.packages("ggplot2")
 if(!require(ggrepel)) install.packages("ggrepel")
 if(!require(scales)) install.packages("scales")
+if(!require(patchwork)) devtools::install_github("thomasp85/patchwork")
+if(!require(RColorBrewer)) install.packages("RColorBrewer")
 #Dataframe
 if(!require(tidyverse)) install.packages("tidyverse")
 if(!require(rlist)) install.packages("rlist")
@@ -79,7 +83,7 @@ listSimulationResults <- mclapply(listSimulationCaseScenario, fSimulation)
 source("r/spatial_seir_save_results.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 ```
 
-```{r make_figure}
+```{r make_figure, results="hide"}
 #Set DataFrame from Simulation Results
 dfResultsLong1 <- listSimulationResults[[1]]
 dfResultsLong2 <- listSimulationResults[[2]]
@@ -101,7 +105,7 @@ source("r/spatial_seir_make_figure_gapI.R", echo = TRUE, prompt.echo = "", space
 ```
 
 
-```{r make_figure}
+```{r make_figure_from_SEIR_for_paper, results="hide"}
 #Set DataFrame from Simulation Results
 dfResultsLong1 <- listSimulationResults[[1]]
 dfResultsLong2 <- listSimulationResults[[2]]
@@ -114,5 +118,12 @@ endDayFigure <- endDay
 source("r/spatial_seir_make_figure_I_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 source("r/spatial_seir_make_figure_ratiolambda_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 source("r/spatial_seir_make_figure_alpha_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+```
+
+
+```{r make_figure_data_for_paper}
+#Make figures used in the paper
+source("r/spatial_seir_make_figure_odmatrix.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_figure_map.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 ```
 
