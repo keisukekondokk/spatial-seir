@@ -80,7 +80,7 @@ colorPal6 <- colorPal9[1:6]
 
 #Map visualization
 p1 <- ggplot(sfPrefCovid1) +
-  geom_sf(aes(fill = newPositive_equal), lwd = 0.05, color = "black") +
+  geom_sf(aes(fill = newPositive_equal), lwd = 0.15, color = "black") +
   geom_sf(data = sfPrefTokyo, lwd = 0.4, color="black", alpha = 0, show.legend = FALSE) +
   geom_sf(data = sfPrefNagoya, lwd = 0.4, color="black", alpha = 0, show.legend = FALSE) +
   geom_sf(data = sfPrefOsaka, lwd = 0.4, color="black", alpha = 0, show.legend = FALSE) +
@@ -107,7 +107,7 @@ p1
 
 #Map visualization
 p2 <- ggplot(sfPrefCovid2) +
-  geom_sf(aes(fill = newPositive_equal), lwd = 0.05, color = "black") +
+  geom_sf(aes(fill = newPositive_equal), lwd = 0.15, color = "black") +
   geom_sf(data = sfPrefTokyo, lwd = 0.4, color="black", alpha = 0, show.legend = FALSE) +
   geom_sf(data = sfPrefNagoya, lwd = 0.4, color="black", alpha = 0, show.legend = FALSE) +
   geom_sf(data = sfPrefOsaka, lwd = 0.4, color="black", alpha = 0, show.legend = FALSE) +
@@ -144,7 +144,7 @@ g1
 
 #Save
 ggsave(file = "output/fig/paper/fig_map_covid19.eps", plot = g1)
-ggsave(file = "output/fig/paper/fig_map_covid19.png", plot = g2)
+ggsave(file = "output/fig/paper/fig_map_covid19.png", plot = g1)
 
 
 
@@ -196,7 +196,7 @@ sfPrefCovidNratio <- sfPrefCovid %>%
 
 #Map Visualization
 p4 <- ggplot(sfPrefCovidNratio) +
-  geom_sf(aes(fill = ratio_n_weekday), lwd = 0.05, color = "black") +
+  geom_sf(aes(fill = ratio_n_weekday), lwd = 0.15, color = "black") +
   scale_fill_gradient2(low = "midnightblue", 
                        high = "darkred", 
                        midpoint = 1,
@@ -220,7 +220,7 @@ p4
 
 #Map Visualization
 p5 <- ggplot(sfPrefCovidNratio) +
-  geom_sf(aes(fill = ratio_n_weekend), lwd = 0.05, color = "black") +
+  geom_sf(aes(fill = ratio_n_weekend), lwd = 0.15, color = "black") +
   geom_sf(data = sfPrefTokyo, lwd = 0.4, alpha = 0, color="black", show.legend = FALSE) +
   geom_sf(data = sfPrefNagoya, lwd = 0.4, alpha = 0, color="black", show.legend = FALSE) +
   geom_sf(data = sfPrefOsaka, lwd = 0.4, alpha = 0, color="black", show.legend = FALSE) +

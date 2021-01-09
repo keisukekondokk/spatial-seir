@@ -103,6 +103,82 @@ filenamePng <- paste0("output/fig/paper/fig_tile_national_mobility.png")
 ggsave(file = filename, plot = g1)
 ggsave(file = filenamePng, plot = g1)
 
+
+#+++++++++++++++
+# Tile for 47 Prefectures
+#+++++++++++++++
+
+p1_1 <- list()
+#
+for(i in 1:2){
+  dfMatrix <- dfFlow %>%
+    filter(year == 2016) %>%
+    filter(month == 4) %>%
+    filter(periodOfDay == i) %>%
+    mutate(shFlow = if_else(prefCodeDestination == prefCodeOrigin, NA_real_, shFlow))
+  
+  #Tile Plot
+  p1_1[[i]] <- ggplot(dfMatrix, aes(x = prefCodeDestination, y = prefCodeOrigin)) +
+    geom_tile(aes(fill = shFlow)) +
+    coord_fixed() +
+    scale_fill_gradientn(name = "Share", colours = c("snow1", "seagreen4", "darkslategrey"), na.value = "white", limits=c(0, 18), breaks=c(0, 5, 10, 15)) +
+    scale_x_continuous(breaks=c(1,10,20,30,40,47), position = "top") +
+    scale_y_reverse(breaks=c(1,10,20,30,40,47)) + 
+    ylab(label = "Origin Prefecture") +
+    xlab(label = "Destination Prefecture") +
+    theme_classic() +
+    theme(legend.text=element_text(size = 8),
+          legend.title=element_text(size = 8),
+          legend.position = "bottom",
+          legend.margin=margin(l = 0.5, t = -0.2, unit='cm'),
+          axis.title.y =element_text(size = 10),
+          axis.title.x =element_text(size = 10),
+          axis.text.y = element_text(size = 10),
+          axis.text.x = element_text(size = 10),
+          panel.background = element_rect(size=1, color = "black", linetype="solid"),
+          panel.grid.minor = element_blank())
+  
+  #Save Each Plot
+  filename <- paste0("output/fig/paper/fig_tile_national_", i, "_mobility_drop_diagonal.eps")
+  ggsave(file = filename, plot = p1_1[[i]])
+  
+  #Add Title
+  if(i == 1){
+    p1_1[[i]] <- p1_1[[i]] + 
+      ggtitle("Weekday") +
+      theme(
+        plot.title = element_text(size = 10, hjust = 0.5)
+      )
+    guides(fill=FALSE)
+  }
+  if(i == 2){
+    p1_1[[i]] <- p1_1[[i]] + 
+      ggtitle("Weekend and Holiday") +
+      theme(
+        plot.title = element_text(size = 10, hjust = 0.5)
+      )
+    guides(fill=FALSE)
+  }
+  
+}
+
+#Patchwork
+g1_1 <- p1_1[[1]] + p1_1[[2]] + 
+  plot_annotation(
+    title  = "(a) 47 Prefectures",
+    theme = theme(
+      plot.title  = element_text(size = 12, hjust = 0.5, face = "bold")
+    )
+  )
+g1_1
+
+#Save
+filename <- paste0("output/fig/paper/fig_tile_national_mobility_drop_diagonal.eps")
+filenamePng <- paste0("output/fig/paper/fig_tile_national_mobility_drop_diagonal.png")
+ggsave(file = filename, plot = g1_1)
+ggsave(file = filenamePng, plot = g1_1)
+
+
 #+++++++++++++++
 # Tile for Greater Tokyo Area
 #+++++++++++++++
@@ -247,7 +323,7 @@ g3 <- p3[[1]] + p3[[2]] +
 g3
 
 #Save
-filename <- paste0("output/fig/paper/fig_tile_osaka_mobility.eps")
+filenameEps <- paste0("output/fig/paper/fig_tile_osaka_mobility.eps")
 filenamePng <- paste0("output/fig/paper/fig_tile_osaka_mobility.png")
-ggsave(file = filename, plot = g3)
+ggsave(file = filenameEps, plot = g3)
 ggsave(file = filenamePng, plot = g3)

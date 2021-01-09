@@ -1,20 +1,27 @@
+#ERROR CHECK
+if(is.integer(numCaseScenario) == FALSE | numCaseScenario < 1 | numCaseScenario > 7) {
+  stop("ERROR: Use integer from 1 to 7 to select one of the case scenarios.")
+}
 #
-if(numCaseScenario == 1){
+if(numCaseScenario == 1L){
   startDay <- as.Date("2020-04-07", "%Y-%m-%d")
 } 
-if(numCaseScenario == 2){
+if(numCaseScenario == 2L){
   startDay <- as.Date("2020-04-07", "%Y-%m-%d")
 }
-if(numCaseScenario == 3){
+if(numCaseScenario == 3L){
   startDay <- as.Date("2020-08-17", "%Y-%m-%d")
 } 
-if(numCaseScenario == 4){
+if(numCaseScenario == 4L){
   startDay <- as.Date("2020-11-04", "%Y-%m-%d")
 }
-if(numCaseScenario == 5){
+if(numCaseScenario == 5L){
   startDay <- as.Date("2020-11-04", "%Y-%m-%d")
 } 
-if(numCaseScenario == 6){
+if(numCaseScenario == 6L){
+  startDay <- as.Date("2020-11-04", "%Y-%m-%d")
+}
+if(numCaseScenario == 7L){
   startDay <- as.Date("2020-11-04", "%Y-%m-%d")
 }
 #

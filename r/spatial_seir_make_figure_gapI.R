@@ -19,7 +19,9 @@ foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel")) %dopar
   #Dataframe for Gap
   dfTemp4 <- dfTemp1 %>% 
     dplyr::left_join(dfTemp2 %>% select(date, prefCode, I), by = c("date", "prefCode")) %>%
-    dplyr::mutate(gapI = I.x - I.y)
+    dplyr::rename(I_with_mobility = I.x) %>%
+    dplyr::rename(I_without_mobility = I.y) %>%
+    dplyr::mutate(gapI = I_without_mobility - I_with_mobility)
   #Dataframe at Starting Date of Simulation
   dfTemp5 <- dfTemp4 %>% 
     filter(date == startDay+1)
@@ -43,33 +45,22 @@ foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel")) %dopar
       ".eps"
     )
   
-  #Label for Each Case Scenario
-  if(numCaseScenario == 6){
-    #
-    labelLine0 <- "Observed numbers"
-    labelLine1 <- "Simulated numbers from SEIR model \nwith interregional mobility except Tokyo"
-    labelLine2 <- "Simulated numbers from SEIR model\nwith interregional mobility"
-    colorLine <- c("#483d8b", "#f45b5b")
-  } else{
-    labelLine0 <- "Observed numbers"
-    labelLine1 <- "Simulated numbers from SEIR model\nwith interregional mobility"
-    labelLine2 <- "Simulated numbers from SEIR model\nwithout interregional mobility"
-    colorLine <- c("#f45b5b", "#25b086")
-  }
+  #Line Color
+  colorLine <- c("#f45b5b")
   
   #ggplot2
   ggplot() +
-    geom_line(aes(x = date, y = gapI, color = "Gap in number of infectious individuals between SEIR models with and without interregional mobility"),
+    geom_line(aes(x = date, y = gapI, color = "Effects of interregional mobility restriction on the number of infectious individuals"),
               size = 1.3, 
               linetype = "solid",
               data = dfTemp4) +
     geom_point(aes(x = date-1, y = gapI), data = dfTemp5, size = 2, shape = 22, fill="transparent", stroke = 2, color = "red") +
-    geom_label_repel(aes(x = date-1, y = gapI, label = as.character(date-1)), data = dfTemp5, vjust = -3, hjust = 1, size = 3) +
+    geom_label_repel(aes(x = date-1, y = gapI, label = as.character(date-1)), data = dfTemp5, vjust = 2, hjust = 1, size = 3) +
     scale_color_manual(values = colorLine) + 
     scale_y_continuous(limits=c(round(min(dfTemp4$gapI),2), round(max(dfTemp4$gapI),2)), labels = comma_format(accuracy = 1)) +
     scale_x_date(date_breaks = "3 months",
                  date_labels = "%Y\n%m-%d") + 
-    ylab("Gap in number of infectious individuals") +
+    ylab("Gap in Number of Infectious Individuals") +
     xlab("") +
     theme_bw() +
     theme(legend.title=element_blank(),

@@ -34,8 +34,8 @@ if(!require(tmap)) install.packages("tmap")
 
 ```{r setting_parameters}
 #-----------------------------------
-#Choose Case Scenario (1L to 6L)
-numCaseScenario <- 1L
+#Choose Case Scenario (1L to 7L)
+numCaseScenario <- 7L
 #-----------------------------------
 
 #Basic Reproduction Number
@@ -102,6 +102,7 @@ source("r/spatial_seir_make_figure_ratiolambda.R", echo = TRUE, prompt.echo = ""
 source("r/spatial_seir_make_figure_beta.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 source("r/spatial_seir_make_figure_alpha.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 source("r/spatial_seir_make_figure_gapI.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_figure_gapdI.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 ```
 
 

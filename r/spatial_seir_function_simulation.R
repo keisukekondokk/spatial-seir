@@ -21,12 +21,33 @@ fSimulation <- function(vX) {
         mC <- listC[[idxListC1]][[idxListC2]]
         #Stay in residential prefectures instead of staying in Tokyo.
         for(m in 1:47) {
-          mC[m, m] <- mC[m, m] + mC[m, 13]
-          mC[m, 13] <- 0
+          if(m != 13){
+            mC[m, m] <- mC[m, m] + mC[m, 13]
+            mC[m, 13] <- 0
+          }
         }
         #Tokyo Lockdown
         mC[13,] <- 0
         mC[13, 13] <- 1
+      } 
+      if(idxCase == 7){
+        #Mobility Restriction only for Greater Tokyo Area
+        idxListC1 <- dfSnapShotTime$date_month[t] 
+        idxListC2 <- dfSnapShotTime$date_holiday[t]+1
+        mC <- listC[[idxListC1]][[idxListC2]]
+        #Stay in residential prefectures instead of staying in Greater Tokyo Area
+        for(m in 1:47) {
+          if(m < 11 | m > 14){
+            mC[m, m] <- mC[m, m] + mC[m, 11] + mC[m, 12] + mC[m, 13] + mC[m, 14]
+            mC[m, 11:14] <- 0
+          }
+        }
+        #Greater Tokyo Area Lockdown
+        mC[11:14,] <- 0
+        mC[11, 11] <- 1
+        mC[12, 12] <- 1
+        mC[13, 13] <- 1
+        mC[14, 14] <- 1
       } else{
         #Free Mobility
         idxListC1 <- dfSnapShotTime$date_month[t] 
@@ -37,7 +58,7 @@ fSimulation <- function(vX) {
     #OD Matrix for List 2
     if(k == 2){
       mC <- mIdentity
-      if(idxCase == 6){
+      if(idxCase == 6 | idxCase == 7){
         #Free Mobility
         idxListC1 <- dfSnapShotTime$date_month[t] 
         idxListC2 <- dfSnapShotTime$date_holiday[t]+1
