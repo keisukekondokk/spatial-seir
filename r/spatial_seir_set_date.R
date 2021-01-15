@@ -26,4 +26,4 @@ if(numCaseScenario == 7L){
 }
 #
 endDay <- as.Date("2023-12-31", "%Y-%m-%d")
-dataDay <- as.Date("2020-11-26", "%Y-%m-%d") - (l_epsilon + l_gamma + 1)
+dataDay <- as.Date("2021-01-11", "%Y-%m-%d") - (l_epsilon + l_gamma + 1)

@@ -1,0 +1,333 @@
+---
+title: "Figures: <br>Simulating the Impacts of Interregional Mobility Restriction on the Spatial Spread of COVID-19 in Japan"
+author: "Kondo Keisuke"
+date: "`r format(Sys.time(), '%Y/%m/%d')`"
+abstract: "This study develops a spatial Susceptible–Exposed–Infectious–Recovered (SEIR) model that analyzes the effect of interregional mobility on the spatial spread of the coronavirus disease 2019 (COVID-19) outbreak in Japan. National and local governments have requested that residents refrain from traveling between 47 prefectures during the state of emergency. However, the extent to which restricting the interregional mobility prevents infection expansion has not been elucidated. Our spatial SEIR model describes the spatial spread pattern of COVID-19 when people commute to a prefecture where they work or study during the daytime and return to their residential prefecture at night. We assume that people are exposed to infection risk during their daytime activities. According to our simulation results, interregional mobility restriction can prevent geographical expansion of the infection. However, in prefectures with many infectious individuals, residents are exposed to higher infection risk when their mobility is restricted. Our simulation results also show that interregional mobility restriction plays a limited role in reducing the national total number of infected individuals."
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    number_sections: TRUE
+    highlight: breezedark
+---
+
+<style>
+img.float-left { float: left; }
+</style>
+
+```{r knitr_option, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE, results="hide", message=FALSE, warning=FALSE)
+```
+
+<div class="alert alert-info">
+Kondo, K. "<b>Simulating the Impacts of Interregional Mobility Restriction on the Spatial Spread of COVID-19 in Japan,</b>" Preprint at medRxiv. (2020) <br>
+https://doi.org/10.1101/2020.12.28.20248926
+</div>
+
+
+```{r include_packages}
+#from Github
+if(!require(devtools)) install.packages("devtools")
+#GRAPH
+if(!require(ggplot2)) install.packages("ggplot2")
+if(!require(ggrepel)) install.packages("ggrepel")
+if(!require(scales)) install.packages("scales")
+if(!require(patchwork)) devtools::install_github("thomasp85/patchwork")
+if(!require(RColorBrewer)) install.packages("RColorBrewer")
+#Dataframe
+if(!require(tidyverse)) install.packages("tidyverse")
+if(!require(readxl)) install.packages("readxl")
+#Loop
+if(!require(parallel)) install.packages("parallel")
+if(!require(doParallel)) install.packages("doParallel")
+if(!require(foreach)) install.packages("foreach")
+#Shapefile
+if(!require(sf)) install.packages("sf")
+#Map Visualization
+if(!require(tmap)) install.packages("tmap")
+```
+
+
+# OD Matrix
+
+This code chunk creates figures of OD matrix used in the manuscript. Open `output/fig/paper` directory.
+
+```{r make_figure_odmatrix_for_paper}
+#OD Matrix
+source("r/spatial_seir_make_figure_odmatrix.R", echo = TRUE, prompt.echo = "")
+```
+
+
+# Map Visualization
+
+This code chunk creates maps used in the manuscript. Open `output/fig/paper` directory.
+
+```{r make_figure_maps_for_paper}
+#Map Visualization
+source("r/spatial_seir_make_figure_map.R", echo = TRUE, prompt.echo = "")
+```
+
+
+
+# Simulation Results in Senario 4
+
+## Degree of NPIs
+
+<img src="output/fig/case04/FIG_Alpha_Pref01_Paper.png" width="100%" alt="alpha" class="float-left">
+
+## Ratio of Daytime and Nighttime Force of Infection
+
+<img src="output/fig/case04/FIG_I_Pref00_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref01_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref02_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref03_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_I_Pref04_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref05_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref06_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref07_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_I_Pref08_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref09_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref10_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref11_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_I_Pref12_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref13_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref14_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref15_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_I_Pref16_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref17_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref18_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref19_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_I_Pref20_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref21_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref22_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref23_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_I_Pref24_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref25_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref26_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref27_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_I_Pref28_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref29_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref30_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref31_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_I_Pref32_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref33_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref34_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref35_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_I_Pref36_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref37_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref38_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref39_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_I_Pref40_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref41_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref42_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref43_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_I_Pref44_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref45_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref46_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_I_Pref47_Paper.png" width="25%" alt="I" class="float-left">
+
+
+## Number of Infectious Individuals
+
+<img src="output/fig/case04/FIG_RatioLambda_Pref00_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref01_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref02_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref03_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_RatioLambda_Pref04_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref05_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref06_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref07_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_RatioLambda_Pref08_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref09_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref10_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref11_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_RatioLambda_Pref12_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref13_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref14_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref15_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_RatioLambda_Pref16_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref17_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref18_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref19_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_RatioLambda_Pref20_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref21_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref22_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref23_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_RatioLambda_Pref24_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref25_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref26_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref27_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_RatioLambda_Pref28_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref29_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref30_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref31_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_RatioLambda_Pref32_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref33_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref34_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref35_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_RatioLambda_Pref36_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref37_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref38_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref39_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_RatioLambda_Pref40_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref41_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref42_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref43_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case04/FIG_RatioLambda_Pref44_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref45_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref46_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case04/FIG_RatioLambda_Pref47_Paper.png" width="25%" alt="I" class="float-left">
+
+
+# Simulation Results in Senario 5
+
+## Degree of NPIs
+
+<img src="output/fig/case05/FIG_Alpha_Pref01_Paper.png" width="100%" alt="alpha" class="float-left">
+
+## Ratio of Daytime and Nighttime Force of Infection
+
+<img src="output/fig/case05/FIG_I_Pref00_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref01_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref02_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref03_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_I_Pref04_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref05_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref06_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref07_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_I_Pref08_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref09_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref10_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref11_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_I_Pref12_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref13_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref14_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref15_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_I_Pref16_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref17_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref18_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref19_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_I_Pref20_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref21_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref22_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref23_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_I_Pref24_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref25_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref26_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref27_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_I_Pref28_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref29_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref30_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref31_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_I_Pref32_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref33_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref34_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref35_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_I_Pref36_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref37_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref38_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref39_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_I_Pref40_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref41_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref42_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref43_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_I_Pref44_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref45_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref46_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_I_Pref47_Paper.png" width="25%" alt="I" class="float-left">
+
+
+## Number of Infectious Individuals
+
+<img src="output/fig/case05/FIG_RatioLambda_Pref00_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref01_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref02_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref03_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_RatioLambda_Pref04_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref05_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref06_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref07_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_RatioLambda_Pref08_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref09_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref10_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref11_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_RatioLambda_Pref12_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref13_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref14_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref15_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_RatioLambda_Pref16_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref17_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref18_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref19_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_RatioLambda_Pref20_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref21_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref22_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref23_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_RatioLambda_Pref24_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref25_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref26_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref27_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_RatioLambda_Pref28_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref29_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref30_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref31_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_RatioLambda_Pref32_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref33_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref34_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref35_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_RatioLambda_Pref36_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref37_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref38_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref39_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_RatioLambda_Pref40_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref41_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref42_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref43_Paper.png" width="25%" alt="I" class="float-left">
+
+<img src="output/fig/case05/FIG_RatioLambda_Pref44_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref45_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref46_Paper.png" width="25%" alt="I" class="float-left">
+<img src="output/fig/case05/FIG_RatioLambda_Pref47_Paper.png" width="25%" alt="I" class="float-left">

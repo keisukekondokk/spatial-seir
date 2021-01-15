@@ -8,14 +8,15 @@ dfPanelDB <- dfPanel %>%
   dplyr::mutate(I = cumPositive - R) %>%
   dplyr::mutate(E = lead(cumPositive, n = l_epsilon) - cumPositive) %>%
   dplyr::ungroup() %>%
-  dplyr::mutate(E = if_else(is.na(E) & date <= dataDay-l_epsilon, 0, E)) %>%
+  dplyr::mutate(E = if_else(is.na(E) & date <= dataDay, 0, E)) %>%
   dplyr::mutate(I = if_else(is.na(I) & date <= dataDay, 0, I)) %>%
   dplyr::mutate(R = if_else(is.na(R) & date <= dataDay, 0, R)) %>%
   dplyr::mutate(S = N - E - I - R) %>%
-  dplyr::mutate(S = if_else(date > dataDay-l_epsilon, NA_real_, S)) %>%
-  dplyr::mutate(E = if_else(date > dataDay-l_epsilon, NA_real_, E)) %>%
+  dplyr::mutate(S = if_else(date > dataDay, NA_real_, S)) %>%
+  dplyr::mutate(E = if_else(date > dataDay, NA_real_, E)) %>%
   dplyr::mutate(I = if_else(date > dataDay, NA_real_, I)) %>%
   dplyr::mutate(R = if_else(date > dataDay, NA_real_, R)) %>%
+  dplyr::mutate(dI = if_else(date > dataDay, NA_real_, dI)) %>%
   dplyr::select(numDays, everything())
 
 #Data
@@ -96,14 +97,14 @@ mdI <- matrix(0, looptime, region)
 mR <- matrix(0, looptime, region)
 mRatioLambda <- matrix(0, looptime, region)
 mBeta <- matrix(0, looptime, region)
-colnames(mN) <- mapply(function(x) {paste0("N", x) }, 1:47)
-colnames(mS) <- mapply(function(x) {paste0("S", x) }, 1:47)
-colnames(mE) <- mapply(function(x) {paste0("E", x) }, 1:47)
-colnames(mI) <- mapply(function(x) {paste0("I", x) }, 1:47)
-colnames(mdI) <- mapply(function(x) {paste0("dI", x) }, 1:47)
-colnames(mR) <- mapply(function(x) {paste0("R", x) }, 1:47)
-colnames(mRatioLambda) <- mapply(function(x) {paste0("RatioLambda", x) }, 1:47)
-colnames(mBeta) <- mapply(function(x) {paste0("Beta", x) }, 1:47)
+colnames(mN) <- mapply(function(x) {paste0("N", x) }, 1:region)
+colnames(mS) <- mapply(function(x) {paste0("S", x) }, 1:region)
+colnames(mE) <- mapply(function(x) {paste0("E", x) }, 1:region)
+colnames(mI) <- mapply(function(x) {paste0("I", x) }, 1:region)
+colnames(mdI) <- mapply(function(x) {paste0("dI", x) }, 1:region)
+colnames(mR) <- mapply(function(x) {paste0("R", x) }, 1:region)
+colnames(mRatioLambda) <- mapply(function(x) {paste0("RatioLambda", x) }, 1:region)
+colnames(mBeta) <- mapply(function(x) {paste0("Beta", x) }, 1:region)
 
 #Initial Values
 mS[1,] <- t(vS0)
