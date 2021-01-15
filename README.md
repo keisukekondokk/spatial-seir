@@ -8,9 +8,9 @@ URL: https://github.com/keisukekondokk/spatial-seir
 
 Run the R Markdown file [`spatial_seir.Rmd`](./spatial_seir.Rmd). Packages used in the simulation must be installed before running the R code. R scripts in the [`r`](/r) directory are called during the process. All data used for simulation are stored in the [`data`](/data) directory. Simulation results are saved in the [`output`](/output) directory.
 
-Open [`spatial_seir.html`](./spatial_seir.html) for the guide of simulation.
+Open [`spatial_seir.html`](https://htmlpreview.github.io/?https://github.com/keisukekondokk/spatial-seir/blob/main/spatial_seir.html) for the guide of simulation.
 
-Open [`spatial_seir_figure.html`](./spatial_seir_figure.html) for figures of simulation results.
+Open [`spatial_seir_figure.html`](https://htmlpreview.github.io/?https://github.com/keisukekondokk/spatial-seir/blob/main/spatial_seir_figure.html) for figures of simulation results.
 
 ### How to Customize Degrees of Non-Pharmaceutical Interventions
 Open the [`data/parameter`](/data/parameter) directory. There are CSV files that determine the degrees of non-pharmaceutical interventions. 
