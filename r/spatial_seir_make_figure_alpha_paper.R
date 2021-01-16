@@ -68,10 +68,10 @@ foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel")) %dopar
     labelTitle <- "Modest Convergence Scenario"
   }
   if(numCaseScenario == 4){
-    labelTitle <- "Modest Convergence Scenario"
+    labelTitle <- "(a) Modest Convergence Scenario"
   }
   if(numCaseScenario == 5){
-    labelTitle <- "Worsening Scenario"
+    labelTitle <- "(b) Worsening Scenario"
   }
   if(numCaseScenario == 6){
     labelTitle <- "Modest Convergence Scenario"
@@ -93,7 +93,7 @@ foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel")) %dopar
               linetype = "solid",
               data = dfTemp2) +
     geom_point(aes(x = date-1, y = Alpha), data = dfTemp3, size = 2, shape = 22, fill="transparent", stroke = 2, color = "red") +
-    geom_label_repel(aes(x = date-1, y = Alpha, label = as.character(date-1)), data = dfTemp3, vjust = -3, hjust = 1, size = 6) +
+    geom_label_repel(aes(x = date-1, y = Alpha, label = as.character(date-1)), data = dfTemp3, vjust = -3, hjust = 1, size = 3) +
     scale_color_manual(values = colorLine) + 
     scale_y_continuous(breaks=seq(0, 1, by = 0.1), limits=c(0, 1), labels = comma_format(accuracy = .1)) +
     scale_x_date(breaks = date_break_manual,

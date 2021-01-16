@@ -1,7 +1,7 @@
 #GGPLOT2
 cl <- parallel::makeCluster(parallel::detectCores())
 doParallel::registerDoParallel(cl)
-foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel")) %dopar% {
+foreach(i = 0:47, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "stringr")) %dopar% {
   print(paste0("Prefecture: ", i))
   #Dataframe of List 1
   dfTemp1 <- dfResultsLong1 %>%

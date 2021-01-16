@@ -11,10 +11,6 @@ output:
     highlight: breezedark
 ---
 
-<style>
-img { float: left; }
-</style>
-
 ```{r knitr_option, include=FALSE}
 knitr::opts_chunk$set(cache = TRUE, results="hide", message=FALSE, warning=FALSE)
 ```
@@ -146,7 +142,7 @@ source("r/spatial_seir_save_results.R", echo = TRUE, prompt.echo = "", spaced = 
 
 This code chunk creates figures of simulation results. Open `output/fig` directory.
 
-```{r make_figure, results="hide"}
+```{r make_figure}
 #Set DataFrame from Simulation Results
 dfResultsLong1 <- listSimulationResults[[1]]
 dfResultsLong2 <- listSimulationResults[[2]]
@@ -173,7 +169,7 @@ source("r/spatial_seir_make_figure_gapdI.R", echo = TRUE, prompt.echo = "", spac
 
 This code chunk creates figures of simulation results used in the manuscript. Open `output/fig` directory.
 
-```{r make_figure_from_SEIR_for_paper, results="hide"}
+```{r make_figure_for_paper, eval=FALSE}
 #Set DataFrame from Simulation Results
 dfResultsLong1 <- listSimulationResults[[1]]
 dfResultsLong2 <- listSimulationResults[[2]]
