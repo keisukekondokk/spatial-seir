@@ -1,0 +1,60 @@
+---
+title: "Figures: <br>Simulating the Impacts of Interregional Mobility Restriction on the Spatial Spread of COVID-19 in Japan"
+author: "Kondo Keisuke"
+date: "`r format(Sys.time(), '%Y/%m/%d')`"
+abstract: "A spatial susceptible–exposed–infectious–recovered (SEIR) model is developed to analyze the effects of interregional mobility on the spatial spread of the coronavirus disease 2019 (COVID-19) outbreak in Japan. National and local governments have requested that residents refrain from traveling between 47 prefectures during the state of emergency. However, the extent to which restricting the interregional mobility prevented infection expansion is unclear. The spatial SEIR model describes the spatial spread pattern of COVID-19 infection when people commute or travel to a prefecture in the daytime and return to their residential prefecture at night. It is assumed that people are exposed to an infection risk during their daytime activities. The spatial spread of COVID-19 infection is simulated by integrating the interregional mobility data. According to the simulation results, interregional mobility restrictions can prevent the geographical expansion of an infection. On the other hand, in prefectures with many infectious individuals, residents are exposed to higher infection risk when their mobility is restricted. The simulation results also show that interregional mobility restrictions play a limited role in reducing the total number of infected individuals in Japan, suggesting that other non-pharmaceutical interventions should be combined to reduce the epidemic size."
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    number_sections: TRUE
+    highlight: breezedark
+---
+
+<style>
+img.float-left { float: left; }
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE, results="hide", message=FALSE, warning=FALSE)
+```
+
+<div class="alert alert-info">
+Kondo, K. "<b>Simulating the Impacts of Interregional Mobility Restriction on the Spatial Spread of COVID-19 in Japan,</b>" Preprint at medRxiv. (2020) <br>
+https://doi.org/10.1101/2020.12.28.20248926
+</div>
+
+
+```{r include_packages, include=FALSE}
+#from Github
+if(!require(devtools)) install.packages("devtools")
+#GRAPH
+if(!require(ggplot2)) install.packages("ggplot2")
+if(!require(ggrepel)) install.packages("ggrepel")
+if(!require(scales)) install.packages("scales")
+if(!require(patchwork)) devtools::install_github("thomasp85/patchwork")
+if(!require(RColorBrewer)) install.packages("RColorBrewer")
+#Dataframe
+if(!require(tidyverse)) install.packages("tidyverse")
+if(!require(readxl)) install.packages("readxl")
+#Loop
+if(!require(parallel)) install.packages("parallel")
+if(!require(doParallel)) install.packages("doParallel")
+if(!require(foreach)) install.packages("foreach")
+#Shapefile
+if(!require(sf)) install.packages("sf")
+#Map Visualization
+if(!require(tmap)) install.packages("tmap")
+```
+
+
+# Map Visualization
+
+This code chunk creates maps used in the manuscript. Open `output/fig/paper` directory.
+
+```{r make_figure_maps_for_paper}
+#Map Visualization
+setwd(rprojroot::find_rstudio_root_file())
+source("r/spatial_seir_figure_map_infection.R", echo = TRUE, prompt.echo = "")
+```
+

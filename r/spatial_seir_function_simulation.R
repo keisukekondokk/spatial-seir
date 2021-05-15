@@ -1,6 +1,6 @@
 #fSimulation(vX[1:2])
 #vX[1]: integer. 1: simulation with interregional mobility 2: simulation without interregional mobility
-#vX[2]: integer. number of case scenario (1L to 6L)
+#vX[2]: integer. number of case scenario (1L to 7L)
 
 #Simulation from Starting Date to End Date
 fSimulation <- function(vX) {
@@ -12,87 +12,225 @@ fSimulation <- function(vX) {
     k <- vX[1]
     idxCase <- vX[2]
     
+    #=======================
     #OD Matrix for List 1
+    #=======================
     if(k == 1){
-      if(idxCase == 6){
-        #Mobility Restriction only for Tokyo
+      if(idxCase == 1){
+        #Free Mobility
         idxListC1 <- dfSnapShotTime$date_month[t] 
-        idxListC2 <- dfSnapShotTime$date_holiday[t]+1
-        mC <- listC[[idxListC1]][[idxListC2]]
-        #Stay in residential prefectures instead of staying in Tokyo.
-        for(m in 1:47) {
-          if(m != 13){
-            mC[m, m] <- mC[m, m] + mC[m, 13]
-            mC[m, 13] <- 0
-          }
-        }
-        #Tokyo Lockdown
-        mC[13,] <- 0
-        mC[13, 13] <- 1
-      } 
-      if(idxCase == 7){
+        idxListC2 <- dfSnapShotTime$date_holiday[t] + 1
+        mC <- listC[[1]][[idxListC1]][[idxListC2]]
+        mCS <- mC
+        mCE <- mC
+        mCI <- mC
+        mCR <- mC
+      }
+      if(idxCase == 2){
+        #Free Mobility
+        idxListC1 <- dfSnapShotTime$date_month[t] 
+        idxListC2 <- dfSnapShotTime$date_holiday[t] + 1
+        mC <- listC[[1]][[idxListC1]][[idxListC2]]
+        mCS <- mC
+        mCE <- mC
+        mCI <- mC
+        mCR <- mC
+      }
+      if(idxCase == 3){
+        #Free Mobility
+        idxListC1 <- dfSnapShotTime$date_month[t] 
+        idxListC2 <- dfSnapShotTime$date_holiday[t] + 1
+        mC <- listC[[2]][[idxListC1]][[idxListC2]]
+        mCS <- mC
+        mCE <- mC
+        mCI <- mC
+        mCR <- mC
+      }
+      if(idxCase == 4){
+        #Free Mobility
+        idxListC1 <- dfSnapShotTime$date_month[t] 
+        idxListC2 <- dfSnapShotTime$date_holiday[t] + 1
+        mC <- listC[[1]][[idxListC1]][[idxListC2]]
+        mCS <- mC
+        mCE <- mC
+        mCI <- mIdentity
+        mCR <- mC
+      }
+      if(idxCase == 5){
         #Mobility Restriction only for Greater Tokyo Area
         idxListC1 <- dfSnapShotTime$date_month[t] 
-        idxListC2 <- dfSnapShotTime$date_holiday[t]+1
-        mC <- listC[[idxListC1]][[idxListC2]]
+        idxListC2 <- dfSnapShotTime$date_holiday[t] + 1
+        mC <- listC[[1]][[idxListC1]][[idxListC2]]
         #Stay in residential prefectures instead of staying in Greater Tokyo Area
         for(m in 1:47) {
           if(m < 11 | m > 14){
             mC[m, m] <- mC[m, m] + mC[m, 11] + mC[m, 12] + mC[m, 13] + mC[m, 14]
             mC[m, 11:14] <- 0
           }
+          if(m == 11 | m == 12 | m == 13 | m == 14){
+            mC[m,] <- 0
+            mC[m, m] <- 1
+          }
         }
-        #Greater Tokyo Area Lockdown
-        mC[11:14,] <- 0
-        mC[11, 11] <- 1
-        mC[12, 12] <- 1
-        mC[13, 13] <- 1
-        mC[14, 14] <- 1
-      } else{
-        #Free Mobility
+        mCS <- mC
+        mCE <- mC
+        mCI <- mC
+        mCR <- mC
+      }
+      if(idxCase == 6){
+        #Mobility Restriction only for Greater Osaka Area
         idxListC1 <- dfSnapShotTime$date_month[t] 
-        idxListC2 <- dfSnapShotTime$date_holiday[t]+1
-        mC <- listC[[idxListC1]][[idxListC2]]
+        idxListC2 <- dfSnapShotTime$date_holiday[t] + 1
+        mC <- listC[[1]][[idxListC1]][[idxListC2]]
+        #Stay in residential prefectures instead of staying in Greater Osaka Area
+        for(m in 1:47) {
+          if(m < 26 | m > 28){
+            mC[m, m] <- mC[m, m] + mC[m, 26] + mC[m, 27] + mC[m, 28]
+            mC[m, 26:28] <- 0
+          }
+          if(m == 26 | m == 27 | m == 28){
+            mC[m,] <- 0
+            mC[m, m] <- 1
+          }
+        }
+        mCS <- mC
+        mCE <- mC
+        mCI <- mC
+        mCR <- mC
+      }
+      if(idxCase == 7){
+        #Mobility Restriction only for Tokyo and Osaka
+        idxListC1 <- dfSnapShotTime$date_month[t] 
+        idxListC2 <- dfSnapShotTime$date_holiday[t] + 1
+        mC <- listC[[1]][[idxListC1]][[idxListC2]]
+        #Stay in residential prefectures instead of staying in Tokyo and Osaka
+        for(m in 1:47) {
+          if(m == 13 | m == 27){
+            mC[m,] <- 0
+            mC[m, m] <- 1
+          }
+        }
+        mCS <- mC
+        mCE <- mC
+        mCI <- mC
+        mCR <- mC
       }
     }
+    #=======================
     #OD Matrix for List 2
+    #=======================
     if(k == 2){
-      mC <- mIdentity
-      if(idxCase == 6 | idxCase == 7){
+      if(idxCase == 1){
+        #Mobility Restriction (Diagonal Matrix)
+        mC <- mIdentity 
+        mCS <- mC
+        mCE <- mC
+        mCI <- mC
+        mCR <- mC
+      }
+      if(idxCase == 2){
+        #Mobility Restriction (Diagonal Matrix)
+        mC <- mIdentity 
+        mCS <- mC
+        mCE <- mC
+        mCI <- mC
+        mCR <- mC
+      }
+      if(idxCase == 3){
         #Free Mobility
         idxListC1 <- dfSnapShotTime$date_month[t] 
-        idxListC2 <- dfSnapShotTime$date_holiday[t]+1
-        mC <- listC[[idxListC1]][[idxListC2]]
-      } else{
-        #Mobility Restriction (Diagonal Matrix)
-        mC <- mIdentity
+        idxListC2 <- dfSnapShotTime$date_holiday[t] + 1
+        mC <- listC[[1]][[idxListC1]][[idxListC2]]
+        mCS <- mC
+        mCE <- mC
+        mCI <- mC
+        mCR <- mC
+        
+      }
+      if(idxCase == 4){
+        #Free Mobility
+        idxListC1 <- dfSnapShotTime$date_month[t] 
+        idxListC2 <- dfSnapShotTime$date_holiday[t] + 1
+        mC <- listC[[1]][[idxListC1]][[idxListC2]]
+        mCS <- mC
+        mCE <- mC
+        mCI <- mC
+        mCR <- mC
+      }
+      if(idxCase == 5){
+        #Free Mobility
+        idxListC1 <- dfSnapShotTime$date_month[t] 
+        idxListC2 <- dfSnapShotTime$date_holiday[t] + 1
+        mC <- listC[[1]][[idxListC1]][[idxListC2]]
+        mCS <- mC
+        mCE <- mC
+        mCI <- mC
+        mCR <- mC
+      }
+      if(idxCase == 6){
+        #Free Mobility
+        idxListC1 <- dfSnapShotTime$date_month[t] 
+        idxListC2 <- dfSnapShotTime$date_holiday[t] + 1
+        mC <- listC[[1]][[idxListC1]][[idxListC2]]
+        mCS <- mC
+        mCE <- mC
+        mCI <- mC
+        mCR <- mC
+      }
+      if(idxCase == 7){
+        #Free Mobility
+        idxListC1 <- dfSnapShotTime$date_month[t] 
+        idxListC2 <- dfSnapShotTime$date_holiday[t] + 1
+        mC <- listC[[1]][[idxListC1]][[idxListC2]]
+        mCS <- mC
+        mCE <- mC
+        mCI <- mC
+        mCR <- mC
       }
     }
     
     #NPIs Degree for Case Scenario
-    dfTemp <- listAlpha[[idxCase]] %>%
-      dplyr::filter(year == dfSnapShotTime$date_year[t]) %>%
-      dplyr::filter(month == dfSnapShotTime$date_month[t]) 
-    alpha <- as.double(dfTemp$alpha)
-    beta <- alpha * beta0
+    if(flagSmoothingAlpha == TRUE){
+      iNumDays <- dfCalendarAlpha$numDays[t]
+      dfTempAlpha <- dfCalendarAlpha %>%
+        dplyr::filter(numDays == iNumDays) 
+      vAlpha <- as.numeric(dfTempAlpha$alphaMa)
+    } else {
+      iNumDays <- dfCalendarAlpha$numDays[t]
+      dfTempAlpha <- dfCalendarAlpha %>%
+        dplyr::filter(numDays == iNumDays) 
+      vAlpha <- as.numeric(dfTempAlpha$alpha)
+    }
+    vBeta <- vAlpha * beta0
     
     #Number of Susceptible in the daytime (element by element)
-    numer1 <- mC * matrix(mS[t,], region, region, byrow = FALSE)
+    numer1 <- mCS * matrix(mS[t,], region, region, byrow = FALSE)
     #Number of Infectious in the daytime
-    numer2 <- matrix(t(mC)%*%mI[t,], region, region, byrow = TRUE)
+    numer2 <- matrix(t(mCI)%*%mI[t,], region, region, byrow = TRUE)
     #Number of Total Population in the daytime
-    denom <- matrix(t(mC)%*%vN, region, region, byrow = TRUE)
+    denom <- 
+      matrix(t(mCS)%*%mS[t,], region, region, byrow = TRUE) +
+      matrix(t(mCE)%*%mE[t,], region, region, byrow = TRUE) +
+      matrix(t(mCI)%*%mI[t,], region, region, byrow = TRUE) +
+      matrix(t(mCR)%*%mR[t,], region, region, byrow = TRUE)
+
     #Number of Infectious in the daytime (element by element)
     numer <- numer1 * numer2
     temp <- matrix(rowSums(numer/denom), region, 1, byrow = FALSE)
     
     #Transition
-    vdS <- - beta * temp
-    vdE <- -vdS - epsilon*mE[t,]
+    vdS <- - vBeta * temp
+    vdE <- - vdS - epsilon*mE[t,]
     vdI <- epsilon*mE[t,] - gamma*mI[t,]
     vdR <- gamma*mI[t,]
-    vRatioLambda <- matrix((t(mC) %*% mI[t, ] / t(mC) %*% vN) / (t(mIdentity) %*% mI[t, ] / t(mIdentity) %*% vN), region, 1, byrow = FALSE)
-
+    
+    #Ratio of Force of Infection
+    vRatioLambda <- matrix((t(mCI) %*% mI[t, ] / (t(mCS) %*% mS[t, ] + t(mCE) %*% mE[t, ] + t(mCI) %*% mI[t, ] + t(mCR) %*% mR[t, ])) / 
+                             (t(mIdentity) %*% mI[t, ] / t(mIdentity) %*% vN), region, 1, byrow = FALSE)
+    
+    #Infinite
+    vRatioLambda[is.infinite(vRatioLambda)] <- NA_real_
+    
     #Store Results
     mS[t+1,] <- mS[t,] + vdS
     mE[t+1,] <- mE[t,] + vdE
@@ -100,7 +238,7 @@ fSimulation <- function(vX) {
     mdI[t,] <- epsilon*mE[t,]
     mR[t+1,] <- mR[t,] + vdR
     mRatioLambda[t,] <- vRatioLambda
-    mBeta[t,] <- beta
+    mAlpha[t,] <- vAlpha
   }  
   #LOOP END------------------------------------------------
   
@@ -148,7 +286,7 @@ fSimulation <- function(vX) {
   
   #Force of infection
   dfSimulationResultsAdd <- dfTime %>%
-    dplyr::bind_cols(as_tibble(mBeta)) %>%
+    dplyr::bind_cols(as_tibble(mAlpha)) %>%
     dplyr::bind_cols(as_tibble(mRatioLambda)) %>%
     dplyr::filter(rownumberPost > 1) %>%
     dplyr::left_join(dfSnapShotTime, by = "rownumberPost") %>%
@@ -159,7 +297,7 @@ fSimulation <- function(vX) {
   dfLongAdd <- dfSimulationResultsAdd %>%
     tidyr::pivot_longer(-c(numDays, date, date_year, date_month, date_day, date_holiday),
                         names_to = c(".value", "prefCode"), 
-                        names_pattern = "(Beta|RatioLambda)(.*)") %>%
+                        names_pattern = "(Alpha|RatioLambda)(.*)") %>%
     dplyr::mutate(prefCode = as.numeric(prefCode)) %>%
     dplyr::arrange(prefCode, date)
   
@@ -178,8 +316,8 @@ fSimulation <- function(vX) {
   
   #Merge Dataframe 
   dfResultsLong <- dfResultsLong %>%
-    dplyr::left_join(dfLongAdd %>% select(date, prefCode, Beta, RatioLambda), by = c("date" = "date", "prefCode" = "prefCode")) %>%
-    dplyr::mutate(Beta = if_else(prefCode == 0 & date >= startDay, NA_real_, Beta)) %>%
+    dplyr::left_join(dfLongAdd %>% select(date, prefCode, Alpha, RatioLambda), by = c("date" = "date", "prefCode" = "prefCode")) %>%
+    dplyr::mutate(Alpha = if_else(prefCode == 0 & date >= startDay, NA_real_, Alpha)) %>%
     dplyr::mutate(RatioLambda = if_else(prefCode == 0 & date >= startDay, 1, RatioLambda)) %>%
     dplyr::filter(!is.na(date))
   

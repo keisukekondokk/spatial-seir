@@ -1,0 +1,279 @@
+---
+title: "Figures of Scenario 5: <br>Simulating the Impacts of Interregional Mobility Restriction on the Spatial Spread of COVID-19 in Japan"
+author: "Kondo Keisuke"
+date: "`r format(Sys.time(), '%Y/%m/%d')`"
+abstract: "A spatial susceptible–exposed–infectious–recovered (SEIR) model is developed to analyze the effects of interregional mobility on the spatial spread of the coronavirus disease 2019 (COVID-19) outbreak in Japan. National and local governments have requested that residents refrain from traveling between 47 prefectures during the state of emergency. However, the extent to which restricting the interregional mobility prevented infection expansion is unclear. The spatial SEIR model describes the spatial spread pattern of COVID-19 infection when people commute or travel to a prefecture in the daytime and return to their residential prefecture at night. It is assumed that people are exposed to an infection risk during their daytime activities. The spatial spread of COVID-19 infection is simulated by integrating the interregional mobility data. According to the simulation results, interregional mobility restrictions can prevent the geographical expansion of an infection. On the other hand, in prefectures with many infectious individuals, residents are exposed to higher infection risk when their mobility is restricted. The simulation results also show that interregional mobility restrictions play a limited role in reducing the total number of infected individuals in Japan, suggesting that other non-pharmaceutical interventions should be combined to reduce the epidemic size."
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+    number_sections: TRUE
+    highlight: breezedark
+---
+
+<style>
+img.float-left { float: left; }
+</style>
+
+```{r knitr_option, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE, results="hide", message=FALSE, warning=FALSE)
+```
+
+<div class="alert alert-info">
+Kondo, K. "<b>Simulating the Impacts of Interregional Mobility Restriction on the Spatial Spread of COVID-19 in Japan,</b>" Preprint at medRxiv. (2020) <br>
+https://doi.org/10.1101/2020.12.28.20248926
+</div>
+
+
+# Simulation Results
+
+## Degree of NPIs
+
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref00_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref01_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref02_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref03_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref04_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref05_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref06_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref07_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref08_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref09_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref10_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref11_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref12_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref13_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref14_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref15_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref16_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref17_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref18_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref19_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref20_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref21_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref22_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref23_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref24_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref25_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref26_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref27_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref28_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref29_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref30_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref31_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref32_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref33_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref34_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref35_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref36_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref37_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref38_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref39_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref40_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref41_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref42_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref43_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref44_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref45_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref46_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_Alpha_Pref47_Paper.svg" width="25%" alt="I" class="float-left">
+
+
+## Daily Number of Infection
+
+<img src="../output/fig/case05/paper/FIG_dI_Pref00_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref01_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref02_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref03_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_dI_Pref04_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref05_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref06_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref07_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_dI_Pref08_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref09_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref10_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref11_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_dI_Pref12_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref13_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref14_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref15_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_dI_Pref16_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref17_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref18_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref19_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_dI_Pref20_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref21_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref22_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref23_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_dI_Pref24_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref25_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref26_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref27_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_dI_Pref28_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref29_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref30_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref31_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_dI_Pref32_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref33_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref34_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref35_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_dI_Pref36_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref37_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref38_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref39_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_dI_Pref40_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref41_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref42_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref43_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_dI_Pref44_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref45_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref46_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_dI_Pref47_Paper.svg" width="25%" alt="I" class="float-left">
+
+
+## Number of Infectious Individuals
+
+<img src="../output/fig/case05/paper/FIG_I_Pref00_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref01_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref02_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref03_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_I_Pref04_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref05_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref06_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref07_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_I_Pref08_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref09_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref10_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref11_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_I_Pref12_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref13_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref14_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref15_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_I_Pref16_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref17_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref18_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref19_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_I_Pref20_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref21_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref22_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref23_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_I_Pref24_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref25_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref26_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref27_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_I_Pref28_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref29_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref30_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref31_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_I_Pref32_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref33_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref34_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref35_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_I_Pref36_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref37_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref38_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref39_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_I_Pref40_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref41_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref42_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref43_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_I_Pref44_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref45_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref46_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_I_Pref47_Paper.svg" width="25%" alt="I" class="float-left">
+
+
+## Ratio of Daytime and Nighttime Force of Infection
+
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref00_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref01_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref02_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref03_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref04_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref05_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref06_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref07_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref08_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref09_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref10_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref11_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref12_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref13_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref14_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref15_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref16_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref17_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref18_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref19_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref20_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref21_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref22_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref23_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref24_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref25_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref26_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref27_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref28_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref29_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref30_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref31_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref32_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref33_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref34_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref35_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref36_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref37_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref38_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref39_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref40_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref41_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref42_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref43_Paper.svg" width="25%" alt="I" class="float-left">
+
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref44_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref45_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref46_Paper.svg" width="25%" alt="I" class="float-left">
+<img src="../output/fig/case05/paper/FIG_RatioLambda_Pref47_Paper.svg" width="25%" alt="I" class="float-left">

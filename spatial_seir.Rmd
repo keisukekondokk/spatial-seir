@@ -2,7 +2,7 @@
 title: "Code and Data: <br>Simulating the Impacts of Interregional Mobility Restriction on the Spatial Spread of COVID-19 in Japan"
 author: "Kondo Keisuke"
 date: "`r format(Sys.time(), '%Y/%m/%d')`"
-abstract: "This study develops a spatial Susceptible–Exposed–Infectious–Recovered (SEIR) model that analyzes the effect of interregional mobility on the spatial spread of the coronavirus disease 2019 (COVID-19) outbreak in Japan. National and local governments have requested that residents refrain from traveling between 47 prefectures during the state of emergency. However, the extent to which restricting the interregional mobility prevents infection expansion has not been elucidated. Our spatial SEIR model describes the spatial spread pattern of COVID-19 when people commute to a prefecture where they work or study during the daytime and return to their residential prefecture at night. We assume that people are exposed to infection risk during their daytime activities. According to our simulation results, interregional mobility restriction can prevent geographical expansion of the infection. However, in prefectures with many infectious individuals, residents are exposed to higher infection risk when their mobility is restricted. Our simulation results also show that interregional mobility restriction plays a limited role in reducing the national total number of infected individuals."
+abstract: "A spatial susceptible–exposed–infectious–recovered (SEIR) model is developed to analyze the effects of interregional mobility on the spatial spread of the coronavirus disease 2019 (COVID-19) outbreak in Japan. National and local governments have requested that residents refrain from traveling between 47 prefectures during the state of emergency. However, the extent to which restricting the interregional mobility prevented infection expansion is unclear. The spatial SEIR model describes the spatial spread pattern of COVID-19 infection when people commute or travel to a prefecture in the daytime and return to their residential prefecture at night. It is assumed that people are exposed to an infection risk during their daytime activities. The spatial spread of COVID-19 infection is simulated by integrating the interregional mobility data. According to the simulation results, interregional mobility restrictions can prevent the geographical expansion of an infection. On the other hand, in prefectures with many infectious individuals, residents are exposed to higher infection risk when their mobility is restricted. The simulation results also show that interregional mobility restrictions play a limited role in reducing the total number of infected individuals in Japan, suggesting that other non-pharmaceutical interventions should be combined to reduce the epidemic size."
 output: 
   html_document:
     toc: TRUE
@@ -11,7 +11,7 @@ output:
     highlight: breezedark
 ---
 
-```{r knitr_option, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(cache = TRUE, results="hide", message=FALSE, warning=FALSE)
 ```
 
@@ -32,7 +32,7 @@ This document provides replication codes and data used in the simulation analysi
 
 This study uses the following R packages, which must be installed before running the R code.
 
-```{r include_packages}
+```{r include_packages, include=FALSE}
 #from Github
 if(!require(devtools)) install.packages("devtools")
 #GRAPH
@@ -44,6 +44,7 @@ if(!require(RColorBrewer)) install.packages("RColorBrewer")
 #Dataframe
 if(!require(tidyverse)) install.packages("tidyverse")
 if(!require(readxl)) install.packages("readxl")
+if(!require(zoo)) install.packages("zoo")
 #Loop
 if(!require(parallel)) install.packages("parallel")
 if(!require(doParallel)) install.packages("doParallel")
@@ -55,86 +56,112 @@ if(!require(tmap)) install.packages("tmap")
 ```
 
 
+# Prepare data
+
+This code chunk constructs datasets from original data for simulation.
+
+```{r prepapre_data, include=TRUE, eval=FALSE}
+#Data from NHK
+source("r/spatial_seir_load_data_from_nhk.R", encoding = "utf-8", echo = TRUE, prompt.echo = "", spaced = FALSE)
+```
+
+
 # Parameter settings in the simulation
 
-In this study, the degree of NPIs was exogenously given by the parameter $\alpha(t)$ as a future policy target parameter, and six case scenarios were simulated: 
+The following seven scenarios were simulated: 
 
-<div class="alert alert-secondary">
-1. This is the <b>rapid convergence case scenario</b> at the early stage with <i><b>time-constant transmission rate</b> $\beta(t)$</i> in each month. The simulation starts from <b>April 7, 2020</b>.
-1. This is the <b>modest convergence case scenario</b> in which convergence and divergence repeat with <i><b>time-varying transmission rate</b> $\beta(t)$</i> in each month. The simulation starts from <b>April 7, 2020</b>.
-1. This is the <b>modest convergence case scenario</b> in which convergence and divergence repeat with <i><b>time-varying transmission rate</b> $\beta(t)$</i> in each month. The simulation starts from <b>August 17, 2020</b>.
-1. This is the <b>modest convergence case scenario</b> in which convergence and divergence repeat with <i><b>time-varying transmission rate</b> $\beta(t)$</i> in each month. The simulation starts from <b>November 4, 2020</b>.
-1. This is the <b>worsening case scenario</b> in which convergence and divergence repeat with <i><b>time-varying transmission rate</b> $\beta(t)$</i> in each month. The simulation starts from <b>November 4, 2020</b>.
-1. This is the <b>mobility restriction only for Tokyo</b> and the <b>modest convergence case scenario</b> in which convergence and divergence repeat with <i><b>time-varying transmission rate</b> $\beta(t)$</i> in each month. The simulation starts from <b>November 4, 2020</b>.
+<div class="alert alert-info">
+1. Case 1: The long-run impacts of interregional mobility on the spatial spread of COVID-19 infection based on the spatial SEIR models with and without interregional mobility are compared. The simulation starts from April 7, 2020.
+1. Case 2: The long-run impacts of interregional mobility on the spatial spread of COVID-19 infection based on the spatial SEIR models with and without interregional mobility are compared. The simulation starts from April 23, 2021.
+1. Case 3: The long-run impacts of interregional mobility on the spatial spread of COVID-19 infection based on the spatial SEIR models with and without interregional mobility are compared. The interregional mobility based on where they reside and where people are located at 8 pm is used. The simulation starts from April 23, 2021.
+1. Case 4: The interregional mobility only for infectious people is restricted to remain in their residential prefectures and susceptible, exposed (infected but not yet infectious), and recovered individuals commute freely or travel across prefectures. The simulation starts from April 23, 2021.
+1. Case 5: The interregional mobility is restricted for the Greater Tokyo area (Saitama, Chiba, Tokyo, and kanagawa). It is assumed that residents in the Greater Tokyo area are restricted to remain in each prefecture. However, residents in other prefectures are allowed to commute and travel across prefectures, except for the Greater Tokyo area. The simulation starts from April 23, 2021.
+1. Case 6: The interregional mobility is restricted for the Greater Osaka area (Kyoto, Osaka, and Hyogo). It is assumed that residents in the Greater Osaka area are restricted to remain in each prefecture. However, residents in other prefectures are allowed to commute and travel across prefectures, except for the Greater Osaka area. The simulation starts from April 23, 2021.
+1. Case 7: The interregional mobility of residents in Tokyo and Osaka is restricted, and residents from other prefectures are allowed to stay in Tokyo and Osaka in the daytime. The simulation starts from April 23, 2021.
 </div>
 
 Choose one of the scenarios in the code chunk (e.g., `numCaseScenario <- 4L`).
 
-We assume that average incubation and infectious periods $\ell_\varepsilon$ and $\ell_\gamma$ were assumed as 5 days and 10 days, respectively. The infectiousness probability of an exposed individual was given as $\varepsilon = 1/\ell_\varepsilon$, and the recovery probability of an infected individual was given by $\gamma = 1/\ell_\gamma$. The transmission rate was determined as $\beta = \mathcal{R}_0 \gamma$ based on the standard SEIR model. The basic reproduction number $\mathcal{R}_0$ was set to 2.6, close to that obtained by other studies in Japan. These parameter settings were common to all simulation scenarios except the intervention degree of non-pharmaceutical interventions (NPIs) $\alpha(t)$. 
+We assume that average incubation and infectious periods $\ell_\varepsilon$ and $\ell_\gamma$ were assumed as 5 days and 10 days, respectively. The infectiousness probability of an exposed individual was given as $\varepsilon = 1/\ell_\varepsilon$, and the recovery probability of an infected individual was given by $\gamma = 1/\ell_\gamma$. The transmission rate was determined as $\beta = \mathcal{R}_0 \gamma$ based on the standard SEIR model. The basic reproduction number $\mathcal{R}_0$ was set to 2.6, close to that obtained by other studies in Japan. These parameter settings were common to all scenarios.
 
 The degree of NPIs is loaded from the `data/parameter` directory, in which there are CSV files that determine the degrees of NPIs in each scenario.
 
-```{r setting_parameters}
+```{r setting_parameters, include=TRUE}
 #-----------------------------------
-#Choose Case Scenario (1L to 6L)
-numCaseScenario <- 4L
+#Choose Case Scenario (1L to 7L)
+numCaseScenario <- 7L
 #-----------------------------------
 
 #Basic Reproduction Number
 R0 <- 2.6
+
 #Average Incubation Period (day)
 l_epsilon <- 5
+
 #Average Infectious Period (day)
 l_gamma <- 10
+
 #Incubation Rate
 epsilon <- 1 / l_epsilon
+
 #Recovery Rate
 gamma <- 1 / l_gamma
+
 #Transmission Rate
 beta0 <- R0 * gamma
-#NPIs Degree
+
+#Degree of NPIs : Choose one of them for Alpha
+#source("r/spatial_seir_load_data_alpha_from_manual.R", encoding = "utf-8", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_load_data_alpha_from_r0.R", encoding = "utf-8", echo = TRUE, prompt.echo = "", spaced = FALSE)
 listFiles <- list.files("data/parameter", pattern = ".csv", full.names = TRUE)
 listAlpha <- lapply(listFiles, read_csv)
+
+#Smoothing Monthly Alpha (TRUE/FALSE)
+flagSmoothingAlpha <- TRUE
+
+#Total Number of Scenarios
+numTotalScenario <- 7L
 ```
 
 
 The simulation start date is set in the `r/spatial_seir_set_date.R`. It is possible to change the start date of simulation.
 
-```{r setting_date}
+```{r setting_date, include=TRUE}
 #Date Setting for Simulation
-source("r/spatial_seir_set_date.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_set_date.R", encoding = "utf-8", echo = TRUE, prompt.echo = "", spaced = FALSE)
 ```
 
 The dataset for simulation is created by the `r/spatial_seir_make_data.R`.  
 
-```{r make_dataset}
+```{r make_dataset, include=TRUE}
 #Load and Make Dataset for Simulation
-source("r/spatial_seir_load_data.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
-source("r/spatial_seir_make_data.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+
+source("r/spatial_seir_load_data.R", encoding = "utf-8", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_data.R", encoding = "utf-8", echo = TRUE, prompt.echo = "", spaced = FALSE)
 ```
 
 # Simulation
 
 This code chunk makes folders to store simulation results.
 
-```{r make_folders_to_store_results}
+```{r make_folders_to_store_results, include=TRUE}
 #Make Folders to Store Results
-source("r/spatial_seir_make_folders_to_store_results.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_make_folders_to_store_results.R", encoding = "utf-8", echo = TRUE, prompt.echo = "", spaced = FALSE)
 ```
 
 
 This code chunk simulates the spatial SEIR model with and without interregional mobility.
 
-```{r do_simulation}
+```{r do_simulation, include=TRUE}
 #Call Function
-source("r/spatial_seir_function_simulation.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_function_simulation.R", encoding = "utf-8", echo = TRUE, prompt.echo = "", spaced = FALSE)
 
 #Do Simulation
 listSimulationCaseScenario <- list(c(1, numCaseScenario), c(2, numCaseScenario))
 listSimulationResults <- mclapply(listSimulationCaseScenario, fSimulation)
 
 #Save Results
-source("r/spatial_seir_save_results.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_save_results.R", encoding = "utf-8", echo = TRUE, prompt.echo = "", spaced = FALSE)
 ```
 
 
@@ -142,26 +169,30 @@ source("r/spatial_seir_save_results.R", echo = TRUE, prompt.echo = "", spaced = 
 
 This code chunk creates figures of simulation results. Open `output/fig` directory.
 
-```{r make_figure}
+```{r make_figure, eval=TRUE}
 #Set DataFrame from Simulation Results
 dfResultsLong1 <- listSimulationResults[[1]]
 dfResultsLong2 <- listSimulationResults[[2]]
 
 #Set End Day in Figure
-#endDayFigure <- as.Date("2022-03-31", "%Y-%m-%d")
-endDayFigure <- endDay
+if(numCaseScenario == 1){
+  startDayFigure <- as.Date("2020-01-01", "%Y-%m-%d")
+  endDayFigure <- endDay
+} else {
+  startDayFigure <- as.Date("2020-01-01", "%Y-%m-%d")
+  endDayFigure <- endDay
+}
 
-#Make Figures
-source("r/spatial_seir_make_figure_I.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
-source("r/spatial_seir_make_figure_dI.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
-source("r/spatial_seir_make_figure_E.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
-source("r/spatial_seir_make_figure_S.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
-source("r/spatial_seir_make_figure_R.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
-source("r/spatial_seir_make_figure_ratiolambda.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
-source("r/spatial_seir_make_figure_beta.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
-source("r/spatial_seir_make_figure_alpha.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
-source("r/spatial_seir_make_figure_gapI.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
-source("r/spatial_seir_make_figure_gapdI.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+#Make Figures (EPS and SVG Format)
+source("r/spatial_seir_figure_I.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_figure_dI.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_figure_E.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_figure_S.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_figure_R.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_figure_ratiolambda.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_figure_alpha.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_figure_gapI.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_figure_gapdI.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 ```
 
 
@@ -169,17 +200,23 @@ source("r/spatial_seir_make_figure_gapdI.R", echo = TRUE, prompt.echo = "", spac
 
 This code chunk creates figures of simulation results used in the manuscript. Open `output/fig` directory.
 
-```{r make_figure_for_paper, eval=FALSE}
+```{r make_figure_for_paper, include=TRUE, eval=TRUE}
 #Set DataFrame from Simulation Results
 dfResultsLong1 <- listSimulationResults[[1]]
 dfResultsLong2 <- listSimulationResults[[2]]
 
 #Set End Day in Figure
-#endDayFigure <- as.Date("2022-03-31", "%Y-%m-%d")
-endDayFigure <- endDay
+if(numCaseScenario == 1){
+  startDayFigure <- as.Date("2020-01-01", "%Y-%m-%d")
+  endDayFigure <- as.Date("2024-03-01", "%Y-%m-%d")
+} else {
+  startDayFigure <- as.Date("2020-01-01", "%Y-%m-%d")
+  endDayFigure <- as.Date("2024-03-01", "%Y-%m-%d")
+}
 
 #Make Figures
-source("r/spatial_seir_make_figure_I_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
-source("r/spatial_seir_make_figure_ratiolambda_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
-source("r/spatial_seir_make_figure_alpha_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_figure_I_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_figure_dI_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_figure_ratiolambda_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
+source("r/spatial_seir_figure_alpha_paper.R", echo = TRUE, prompt.echo = "", spaced = FALSE)
 ```

@@ -1,29 +1,37 @@
 #ERROR CHECK
-if(is.integer(numCaseScenario) == FALSE | numCaseScenario < 1 | numCaseScenario > 7) {
-  stop("ERROR: Use integer from 1 to 7 to select one of the case scenarios.")
+if(is.integer(numCaseScenario) == FALSE | numCaseScenario < 1L | numCaseScenario > numTotalScenario) {
+  stop(paste0("ERROR: Use integer from 1 to ", numTotalScenario, " to select one of the case scenarios."))
 }
 #
 if(numCaseScenario == 1L){
+  #Calibration
   startDay <- as.Date("2020-04-07", "%Y-%m-%d")
 } 
 if(numCaseScenario == 2L){
-  startDay <- as.Date("2020-04-07", "%Y-%m-%d")
+  #Projection
+  startDay <- as.Date("2021-04-23", "%Y-%m-%d")
 }
 if(numCaseScenario == 3L){
-  startDay <- as.Date("2020-08-17", "%Y-%m-%d")
+  #Projection at 8pm
+  startDay <- as.Date("2021-04-23", "%Y-%m-%d")
 } 
 if(numCaseScenario == 4L){
-  startDay <- as.Date("2020-11-04", "%Y-%m-%d")
+  #Projection Infectious Individuals
+  startDay <- as.Date("2021-04-23", "%Y-%m-%d")
 }
 if(numCaseScenario == 5L){
-  startDay <- as.Date("2020-11-04", "%Y-%m-%d")
+  #Projection Greater Tokyo Area
+  startDay <- as.Date("2021-04-23", "%Y-%m-%d")
 } 
 if(numCaseScenario == 6L){
-  startDay <- as.Date("2020-11-04", "%Y-%m-%d")
+  #Projection Greater Osaka Area
+  startDay <- as.Date("2021-04-23", "%Y-%m-%d")
 }
 if(numCaseScenario == 7L){
-  startDay <- as.Date("2020-11-04", "%Y-%m-%d")
+  #Projection Tokyo and Osaka
+  startDay <- as.Date("2021-04-23", "%Y-%m-%d")
 }
+
 #
 endDay <- as.Date("2023-12-31", "%Y-%m-%d")
-dataDay <- as.Date("2021-01-11", "%Y-%m-%d") - (l_epsilon + l_gamma + 1)
+dataDay <- as.Date("2021-05-09", "%Y-%m-%d") - (l_epsilon + l_gamma + 1)

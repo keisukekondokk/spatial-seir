@@ -1,4 +1,4 @@
 .Rproj.user/
 .Rhistory
 spatial_seir_cache/
-spatial_seir_figure_cache/
+spatial_seir_figure_*/
