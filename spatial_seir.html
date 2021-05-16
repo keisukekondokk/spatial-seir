@@ -354,10 +354,10 @@ div.tocify {
 
 <h1 class="title toc-ignore">Code and Data: <br>Simulating the Impacts of Interregional Mobility Restriction on the Spatial Spread of COVID-19 in Japan</h1>
 <h4 class="author">Kondo Keisuke</h4>
-<h4 class="date">2021/05/15</h4>
+<h4 class="date">2021/05/16</h4>
 <div class="abstract">
 <p class="abstract">Abstract</p>
-This study develops a spatial Susceptible–Exposed–Infectious–Recovered (SEIR) model that analyzes the effect of interregional mobility on the spatial spread of the coronavirus disease 2019 (COVID-19) outbreak in Japan. National and local governments have requested that residents refrain from traveling between 47 prefectures during the state of emergency. However, the extent to which restricting the interregional mobility prevents infection expansion has not been elucidated. Our spatial SEIR model describes the spatial spread pattern of COVID-19 when people commute to a prefecture where they work or study during the daytime and return to their residential prefecture at night. We assume that people are exposed to infection risk during their daytime activities. According to our simulation results, interregional mobility restriction can prevent geographical expansion of the infection. However, in prefectures with many infectious individuals, residents are exposed to higher infection risk when their mobility is restricted. Our simulation results also show that interregional mobility restriction plays a limited role in reducing the national total number of infected individuals.
+A spatial susceptible–exposed–infectious–recovered (SEIR) model is developed to analyze the effects of interregional mobility on the spatial spread of the coronavirus disease 2019 (COVID-19) outbreak in Japan. National and local governments have requested that residents refrain from traveling between 47 prefectures during the state of emergency. However, the extent to which restricting the interregional mobility prevented infection expansion is unclear. The spatial SEIR model describes the spatial spread pattern of COVID-19 infection when people commute or travel to a prefecture in the daytime and return to their residential prefecture at night. It is assumed that people are exposed to an infection risk during their daytime activities. The spatial spread of COVID-19 infection is simulated by integrating the interregional mobility data. According to the simulation results, interregional mobility restrictions can prevent the geographical expansion of an infection. On the other hand, in prefectures with many infectious individuals, residents are exposed to higher infection risk when their mobility is restricted. The simulation results also show that interregional mobility restrictions play a limited role in reducing the total number of infected individuals in Japan, suggesting that other non-pharmaceutical interventions should be combined to reduce the epidemic size.
 </div>
 
 </div>
@@ -400,7 +400,7 @@ This study develops a spatial Susceptible–Exposed–Infectious–Recovered (SE
 <p>The degree of NPIs is loaded from the <code>data/parameter</code> directory, in which there are CSV files that determine the degrees of NPIs in each scenario.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#-----------------------------------</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Choose Case Scenario (1L to 7L)</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>numCaseScenario <span class="ot">&lt;-</span> 1L</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>numCaseScenario <span class="ot">&lt;-</span> 2L</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#-----------------------------------</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Basic Reproduction Number</span></span>

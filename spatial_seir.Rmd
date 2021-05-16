@@ -89,7 +89,7 @@ The degree of NPIs is loaded from the `data/parameter` directory, in which there
 ```{r setting_parameters, include=TRUE}
 #-----------------------------------
 #Choose Case Scenario (1L to 7L)
-numCaseScenario <- 7L
+numCaseScenario <- 2L
 #-----------------------------------
 
 #Basic Reproduction Number
