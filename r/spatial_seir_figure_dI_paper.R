@@ -75,8 +75,8 @@ foreach(i = 0:numPref, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "s
   if(numCaseScenario == 4){
     #
     labelLine0 <- "Observed numbers"
-    labelLine1 <- "SEIR model \nwith interregional mobility"
-    labelLine2 <- "SEIR model\nwithout interregional mobility"
+    labelLine1 <- "SEIR model \nwith interregional mobility except infectious persons"
+    labelLine2 <- "SEIR model\nwith interregional mobility"
     colorLine <- c("#2f7ed8", "#483d8b", "#f45b5b")
   }
   if(numCaseScenario == 5){

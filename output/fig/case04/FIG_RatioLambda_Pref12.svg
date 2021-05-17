@@ -64,15 +64,15 @@
 <g clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)'><text x='399.73' y='195.91' style='font-size: 8.00px; fill: #4D4D4D; font-family: Arial;' textLength='20.46px' lengthAdjust='spacingAndGlyphs'>01-01</text></g>
 <g clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)'><text transform='translate(13.35,179.40) rotate(-90)' style='font-size: 11.00px; font-family: Arial;' textLength='148.58px' lengthAdjust='spacingAndGlyphs'>Ratio of daytime and nighttime</text></g>
 <g clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)'><text transform='translate(25.23,146.99) rotate(-90)' style='font-size: 11.00px; font-family: Arial;' textLength='83.77px' lengthAdjust='spacingAndGlyphs'> force of infection</text></g>
-<rect x='107.01' y='5.48' width='269.75' height='17.17' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)' />
-<rect x='64.49' y='10.96' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)' />
-<line x1='66.21' y1='19.60' x2='80.04' y2='19.60' style='stroke-width: 2.77; stroke: #483D8B; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)' />
-<line x1='66.21' y1='19.60' x2='80.04' y2='19.60' style='stroke-width: 2.56; stroke: #483D8B; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)' />
-<rect x='210.21' y='10.96' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)' />
-<line x1='211.94' y1='19.60' x2='225.77' y2='19.60' style='stroke-width: 2.77; stroke: #F45B5B; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)' />
-<line x1='211.94' y1='19.60' x2='225.77' y2='19.60' style='stroke-width: 2.56; stroke: #F45B5B; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)' />
-<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)'><text x='87.24' y='18.32' style='font-size: 7.00px; font-family: Arial;' textLength='117.49px' lengthAdjust='spacingAndGlyphs'>Simulated numbers from SEIR model </text></g>
-<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)'><text x='87.24' y='25.88' style='font-size: 7.00px; font-family: Arial;' textLength='78.59px' lengthAdjust='spacingAndGlyphs'>with interregional mobility</text></g>
-<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)'><text x='232.97' y='18.32' style='font-size: 7.00px; font-family: Arial;' textLength='115.54px' lengthAdjust='spacingAndGlyphs'>Simulated numbers from SEIR model</text></g>
-<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)'><text x='232.97' y='25.88' style='font-size: 7.00px; font-family: Arial;' textLength='88.32px' lengthAdjust='spacingAndGlyphs'>without interregional mobility</text></g>
+<rect x='85.99' y='5.48' width='311.79' height='17.17' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)' />
+<rect x='43.47' y='10.96' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)' />
+<line x1='45.20' y1='19.60' x2='59.02' y2='19.60' style='stroke-width: 2.77; stroke: #483D8B; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)' />
+<line x1='45.20' y1='19.60' x2='59.02' y2='19.60' style='stroke-width: 2.56; stroke: #483D8B; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)' />
+<rect x='231.23' y='10.96' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)' />
+<line x1='232.96' y1='19.60' x2='246.78' y2='19.60' style='stroke-width: 2.77; stroke: #F45B5B; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)' />
+<line x1='232.96' y1='19.60' x2='246.78' y2='19.60' style='stroke-width: 2.56; stroke: #F45B5B; stroke-linecap: butt;' clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)' />
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)'><text x='66.23' y='18.32' style='font-size: 7.00px; font-family: Arial;' textLength='117.49px' lengthAdjust='spacingAndGlyphs'>Simulated numbers from SEIR model </text></g>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)'><text x='66.23' y='25.88' style='font-size: 7.00px; font-family: Arial;' textLength='159.52px' lengthAdjust='spacingAndGlyphs'>with interregional mobility except infectious persons</text></g>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)'><text x='253.99' y='18.32' style='font-size: 7.00px; font-family: Arial;' textLength='115.54px' lengthAdjust='spacingAndGlyphs'>Simulated numbers from SEIR model</text></g>
+<g clip-path='url(#cpMC4wMHw0MzIuMDB8MjE2LjAwfDAuMDA=)'><text x='253.99' y='25.88' style='font-size: 7.00px; font-family: Arial;' textLength='78.59px' lengthAdjust='spacingAndGlyphs'>with interregional mobility</text></g>
 </svg>
