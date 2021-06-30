@@ -13,17 +13,7 @@ dfCovidPref <- readr::read_csv("data/covid19/nhk_news_covid19_prefectures_daily_
   dplyr::arrange(prefCode, date)
 
 #
-date_download <- "2021-05-09"
+date_download <- "2021-06-28"
 
 #
 readr::write_csv(dfCovidPref, paste0("data/covid19/df_nhk_news_covid19_prefectures_daily_data_", date_download, ".csv"))
-
-#
-dfRe <- readr::read_csv("data/parameter/effective_reproduction_number.csv") %>%
-  dplyr::rename(date = `日付`) %>%
-  dplyr::rename(Re = `実効再生産数`) %>%
-  dplyr::mutate(alpha = Re / R0) %>% 
-  dplyr::mutate(date = lubridate::ymd(date)) 
-
-#
-readr::write_csv(dfRe, "data/parameter/CSV_npis_degree_case9.csv")

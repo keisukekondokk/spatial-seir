@@ -16,7 +16,7 @@ rm(listPref)
 
 #COVID-19 Infection Data by Prefecture
 #Run "spatial_seir_load_data_from_nhk.R" beforehand
-dfCovidPref <- readr::read_csv("data/covid19/df_nhk_news_covid19_prefectures_daily_data_2021-05-09.csv")
+dfCovidPref <- readr::read_csv("data/covid19/df_nhk_news_covid19_prefectures_daily_data_2021-06-28.csv")
 
 #COVID-19 Infection Data National Total
 dfCovidNational <- dfCovidPref %>%

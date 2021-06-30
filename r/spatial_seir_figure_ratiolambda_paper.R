@@ -1,6 +1,7 @@
 #GGPLOT2
 cl <- parallel::makeCluster(parallel::detectCores())
 doParallel::registerDoParallel(cl)
+listPlot <- list()
 foreach(i = 0:numPref, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "stringr")) %dopar% {
   print(paste0("Prefecture: ", i))
   #Dataframe of List 1
@@ -15,12 +16,18 @@ foreach(i = 0:numPref, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "s
     dplyr::filter(date >= startDayFigure) %>%
     dplyr::filter(date <= endDayFigure) %>%
     dplyr::mutate(RatioLambda = if_else(date < startDay, NA_real_, RatioLambda))
+  #Dataframe of List 3
+  dfTemp3 <- dfResultsLong3 %>%
+    dplyr::filter(prefCode == i) %>%
+    dplyr::filter(date >= startDayFigure) %>%
+    dplyr::filter(date <= endDayFigure) %>%
+    dplyr::mutate(RatioLambda = if_else(date < startDay, NA_real_, RatioLambda))
   #Dataframe at Starting Date of Simulation
-  dfTemp3 <- dfTemp1 %>% 
-    filter(date == startDay+1) %>%
+  dfTemp9 <- dfTemp1 %>% 
+    filter(date == startDay + 1) %>%
     mutate(labelDate = paste(
-      str_sub(as.character(date-1), start = "1", end = "4"),
-      str_sub(as.character(date-1), start = "6", end = "10"),
+      str_sub(as.character(date - 1), start = "1", end = "4"),
+      str_sub(as.character(date - 1), start = "6", end = "10"),
       sep = "\n"
     ))
   
@@ -63,35 +70,40 @@ foreach(i = 0:numPref, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "s
     labelLine0 <- "Observed numbers"
     labelLine1 <- "SEIR model \nwith interregional mobility at 8pm"
     labelLine2 <- "SEIR model\nwith interregional mobility at 2pm"
-    colorLine <- c("#483d8b", "#f45b5b")
+    labelLine3 <- "SEIR model\nwithout interregional mobility"
+    colorLine <- c("#483d8b", "#f45b5b", "#25b086")
   }
   if(numCaseScenario == 4){
     #
     labelLine0 <- "Observed numbers"
     labelLine1 <- "SEIR model \nwith interregional mobility except infectious persons"
     labelLine2 <- "SEIR model\nwith interregional mobility"
-    colorLine <- c("#483d8b", "#f45b5b")
+    labelLine3 <- "SEIR model\nwithout interregional mobility"
+    colorLine <- c("#483d8b", "#f45b5b", "#25b086")
   }
   if(numCaseScenario == 5){
     #
     labelLine0 <- "Observed numbers"
     labelLine1 <- "SEIR model \nwith interregional mobility except Greater Tokyo Area"
     labelLine2 <- "SEIR model\nwith interregional mobility"
-    colorLine <- c("#483d8b", "#f45b5b")
+    labelLine3 <- "SEIR model\nwithout interregional mobility"
+    colorLine <- c("#483d8b", "#f45b5b", "#25b086")
   }
   if(numCaseScenario == 6){
     #
     labelLine0 <- "Observed numbers"
     labelLine1 <- "SEIR model \nwith interregional mobility except Greater Osaka Area"
     labelLine2 <- "SEIR model\nwith interregional mobility"
-    colorLine <- c("#483d8b", "#f45b5b")
+    labelLine3 <- "SEIR model\nwithout interregional mobility"
+    colorLine <- c("#483d8b", "#f45b5b", "#25b086")
   }
   if(numCaseScenario == 7){
     #
     labelLine0 <- "Observed numbers"
     labelLine1 <- "SEIR model \nwith interregional mobility except Tokyo and Osaka"
     labelLine2 <- "SEIR model\nwith interregional mobility"
-    colorLine <- c("#483d8b", "#f45b5b")
+    labelLine3 <- "SEIR model\nwithout interregional mobility"
+    colorLine <- c("#483d8b", "#f45b5b", "#25b086")
   } 
   
   #Legend Display Option
@@ -131,17 +143,34 @@ foreach(i = 0:numPref, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "s
   #ggplot2
   localeOriginal <- Sys.getlocale("LC_CTYPE")
   Sys.setlocale("LC_ALL","English")
-  ggplot() +
-    geom_line(aes(x = date, y = RatioLambda, color = labelLine2),
-              size = 1.6, 
-              linetype = "solid",
-              data = dfTemp2) +
-    geom_line(aes(x = date, y = RatioLambda, color = labelLine1), 
-              size = 1.5, 
-              linetype = "solid",
-              data = dfTemp1) +
-    geom_point(aes(x = date, y = RatioLambda), data = dfTemp3, size = 2, shape = 22, fill="transparent", stroke = 2, color = "red") +
-    geom_label_repel(aes(x = date, y = RatioLambda, label = labelDate), data = dfTemp3, nudge_x = nudge_x_ggrepel, nudge_y = nudge_y_ggrepel, size = 8) +
+  if(numCaseScenario == 1 | numCaseScenario == 2 ){
+    ggtemp <- ggplot() +
+      geom_line(aes(x = date, y = RatioLambda, color = labelLine2),
+                size = 1.6, 
+                linetype = "solid",
+                data = dfTemp2) +
+      geom_line(aes(x = date, y = RatioLambda, color = labelLine1), 
+                size = 1.5, 
+                linetype = "solid",
+                data = dfTemp1)
+  } else {
+    ggtemp <- ggplot() +
+      geom_line(aes(x = date, y = RatioLambda, color = labelLine3),
+                size = 1.6, 
+                linetype = "solid",
+                data = dfTemp3) +
+      geom_line(aes(x = date, y = RatioLambda, color = labelLine2),
+                size = 1.6, 
+                linetype = "solid",
+                data = dfTemp2) +
+      geom_line(aes(x = date, y = RatioLambda, color = labelLine1), 
+                size = 1.5, 
+                linetype = "solid",
+                data = dfTemp1)
+    }
+  listPlot[[i+1]] <- ggtemp +
+    geom_point(aes(x = date, y = RatioLambda), data = dfTemp9, size = 2, shape = 22, fill="transparent", stroke = 2, color = "red") +
+    geom_label_repel(aes(x = date, y = RatioLambda, label = labelDate), data = dfTemp9, nudge_x = nudge_x_ggrepel, nudge_y = nudge_y_ggrepel, size = 8) +
     scale_color_manual(values = colorLine) + 
     scale_y_continuous(limits=c(round(min(dfTemp1$RatioLambda), 3), round(max(dfTemp1$RatioLambda), 3)), labels = comma_format(accuracy = .001)) +
     scale_x_date(date_breaks = x_date_breaks,
@@ -160,11 +189,11 @@ foreach(i = 0:numPref, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "s
           axis.text.y = element_text(size = 24),
           axis.text.x = element_text(size = 24),
           panel.grid.minor = element_blank()) +
-    guides(col = guide_legend(title.position = "top", ncol = 3, nrow = 2, byrow = TRUE))
+    guides(col = guide_legend(title.position = "top", ncol = 4, nrow = 2, byrow = TRUE))
   
   #Save
-  ggsave(file = saveFileNameSvg, dpi = 200, width = 6, height = 4)
-  ggsave(file = saveFileNameEps, dpi = 200, width = 6, height = 4)
+  ggsave(file = saveFileNameSvg, plot = listPlot[[i+1]], dpi = 200, width = 6, height = 4)
+  ggsave(file = saveFileNameEps, plot = listPlot[[i+1]], dpi = 200, width = 6, height = 4)
   #
   Sys.setlocale("LC_ALL", localeOriginal)
 }

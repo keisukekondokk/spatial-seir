@@ -1,6 +1,7 @@
 #GGPLOT2
 cl <- parallel::makeCluster(parallel::detectCores())
 doParallel::registerDoParallel(cl)
+listPlot <- list()
 foreach(i = 0:numPref, .packages = c("scales", "ggplot2", "dplyr", "ggrepel")) %dopar% {
   print(paste0("Prefecture: ", i))
   #Dataframe of List 1
@@ -14,7 +15,7 @@ foreach(i = 0:numPref, .packages = c("scales", "ggplot2", "dplyr", "ggrepel")) %
     dplyr::filter(date <= endDayFigure) %>%
     dplyr::mutate(dI = if_else(date < startDay, NA_real_, dI))
   #Dataframe at Starting Date of Simulation
-  dfTemp3 <- dfTemp1 %>% 
+  dfTemp9 <- dfTemp1 %>% 
     filter(date == startDay+1)
   #Dataframe for Gap
   if(numCaseScenario <= 2){
@@ -70,7 +71,7 @@ foreach(i = 0:numPref, .packages = c("scales", "ggplot2", "dplyr", "ggrepel")) %
   nudge_y_ggrepel <- 0
   
   #ggplot2
-  ggplot() +
+  listPlot[[i+1]] <- ggplot() +
     geom_hline(yintercept = 0, linetype="dashed") +
     geom_line(aes(x = date, y = gapdI),
               size = 1.3, 
@@ -91,12 +92,12 @@ foreach(i = 0:numPref, .packages = c("scales", "ggplot2", "dplyr", "ggrepel")) %
           legend.text=element_text(size = 7),
           legend.margin=margin(l = 0, b = -1.0, unit='cm'),
           axis.title.y = element_text(size = 10),
-          axis.text.x = element_text(size = 8),
+          axis.text.x = element_text(size = 10),
           panel.grid.minor = element_blank()) +
     guides(col = guide_legend(title.position = "top", ncol = 3, nrow = 2, byrow = TRUE))
   
   #Save
-  ggsave(file = saveFileNameSvg, dpi = 200, width = 6, height = 3)
-  ggsave(file = saveFileNameEps, dpi = 200, width = 6, height = 3)
+  ggsave(file = saveFileNameSvg, plot = listPlot[[i+1]], dpi = 200, width = 6, height = 3)
+  ggsave(file = saveFileNameEps, plot = listPlot[[i+1]], dpi = 200, width = 6, height = 3)
 }
 parallel::stopCluster(cl)

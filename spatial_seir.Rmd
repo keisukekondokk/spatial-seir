@@ -72,12 +72,12 @@ The following seven scenarios were simulated:
 
 <div class="alert alert-info">
 1. Case 1: The long-run impacts of interregional mobility on the spatial spread of COVID-19 infection based on the spatial SEIR models with and without interregional mobility are compared. The simulation starts from April 7, 2020.
-1. Case 2: The long-run impacts of interregional mobility on the spatial spread of COVID-19 infection based on the spatial SEIR models with and without interregional mobility are compared. The simulation starts from April 23, 2021.
-1. Case 3: The long-run impacts of interregional mobility on the spatial spread of COVID-19 infection based on the spatial SEIR models with and without interregional mobility are compared. The interregional mobility based on where they reside and where people are located at 8 pm is used. The simulation starts from April 23, 2021.
-1. Case 4: The interregional mobility only for infectious people is restricted to remain in their residential prefectures and susceptible, exposed (infected but not yet infectious), and recovered individuals commute freely or travel across prefectures. The simulation starts from April 23, 2021.
-1. Case 5: The interregional mobility is restricted for the Greater Tokyo area (Saitama, Chiba, Tokyo, and kanagawa). It is assumed that residents in the Greater Tokyo area are restricted to remain in each prefecture. However, residents in other prefectures are allowed to commute and travel across prefectures, except for the Greater Tokyo area. The simulation starts from April 23, 2021.
-1. Case 6: The interregional mobility is restricted for the Greater Osaka area (Kyoto, Osaka, and Hyogo). It is assumed that residents in the Greater Osaka area are restricted to remain in each prefecture. However, residents in other prefectures are allowed to commute and travel across prefectures, except for the Greater Osaka area. The simulation starts from April 23, 2021.
-1. Case 7: The interregional mobility of residents in Tokyo and Osaka is restricted, and residents from other prefectures are allowed to stay in Tokyo and Osaka in the daytime. The simulation starts from April 23, 2021.
+1. Case 2: The long-run impacts of interregional mobility on the spatial spread of COVID-19 infection based on the spatial SEIR models with and without interregional mobility are compared. The simulation starts from April 25, 2021.
+1. Case 3: The long-run impacts of interregional mobility on the spatial spread of COVID-19 infection based on the spatial SEIR models with and without interregional mobility are compared. The interregional mobility based on where they reside and where people are located at 8 pm is used. The simulation starts from April 25, 2021.
+1. Case 4: The interregional mobility only for infectious people is restricted to remain in their residential prefectures and susceptible, exposed (infected but not yet infectious), and recovered individuals commute freely or travel across prefectures. The simulation starts from April 25, 2021.
+1. Case 5: The interregional mobility is restricted for the Greater Tokyo area (Saitama, Chiba, Tokyo, and kanagawa). It is assumed that residents in the Greater Tokyo area are restricted to remain in each prefecture. However, residents in other prefectures are allowed to commute and travel across prefectures, except for the Greater Tokyo area. The simulation starts from April 25, 2021.
+1. Case 6: The interregional mobility is restricted for the Greater Osaka area (Kyoto, Osaka, and Hyogo). It is assumed that residents in the Greater Osaka area are restricted to remain in each prefecture. However, residents in other prefectures are allowed to commute and travel across prefectures, except for the Greater Osaka area. The simulation starts from April 25, 2021.
+1. Case 7: The interregional mobility of residents in Tokyo and Osaka is restricted, and residents from other prefectures are allowed to stay in Tokyo and Osaka in the daytime. The simulation starts from April 25, 2021.
 </div>
 
 Choose one of the scenarios in the code chunk (e.g., `numCaseScenario <- 4L`).
@@ -89,7 +89,7 @@ The degree of NPIs is loaded from the `data/parameter` directory, in which there
 ```{r setting_parameters, include=TRUE}
 #-----------------------------------
 #Choose Case Scenario (1L to 7L)
-numCaseScenario <- 7L
+numCaseScenario <- 2L
 #-----------------------------------
 
 #Basic Reproduction Number
@@ -110,9 +110,12 @@ gamma <- 1 / l_gamma
 #Transmission Rate
 beta0 <- R0 * gamma
 
-#Degree of NPIs : Choose one of them for Alpha
+#Degree of NPIs
+#--------------
+#Choose one of them for Alpha
 #source("r/spatial_seir_load_data_alpha_from_manual.R", encoding = "utf-8", echo = TRUE, prompt.echo = "", spaced = FALSE)
 source("r/spatial_seir_load_data_alpha_from_r0.R", encoding = "utf-8", echo = TRUE, prompt.echo = "", spaced = FALSE)
+#--------------
 listFiles <- list.files("data/parameter", pattern = ".csv", full.names = TRUE)
 listAlpha <- lapply(listFiles, read_csv)
 
@@ -173,6 +176,8 @@ This code chunk creates figures of simulation results. Open `output/fig` directo
 #Set DataFrame from Simulation Results
 dfResultsLong1 <- listSimulationResults[[1]]
 dfResultsLong2 <- listSimulationResults[[2]]
+#For reference Case02
+dfResultsLong3 <- readr::read_csv("output/csv/case02/CSV_simulation_without_mobility.csv", col_types = cols( Alpha = col_double()))
 
 #Set End Day in Figure
 if(numCaseScenario == 1){
@@ -204,6 +209,8 @@ This code chunk creates figures of simulation results used in the manuscript. Op
 #Set DataFrame from Simulation Results
 dfResultsLong1 <- listSimulationResults[[1]]
 dfResultsLong2 <- listSimulationResults[[2]]
+#For reference Case02
+dfResultsLong3 <- readr::read_csv("output/csv/case02/CSV_simulation_without_mobility.csv")
 
 #Set End Day in Figure
 if(numCaseScenario == 1){

@@ -4,7 +4,7 @@ doParallel::registerDoParallel(cl)
 listPlot <- list()
 foreach(i = 0:numPref, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "stringr")) %dopar% {
   print(paste0("Prefecture: ", i))
-  #Dataframe of List 1
+  #Dataframe from Data
   dfTemp0 <- dfPanelDB %>%
     dplyr::filter(prefCode == i) %>%
     dplyr::filter(!is.na(I)) %>%
@@ -22,8 +22,14 @@ foreach(i = 0:numPref, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "s
     dplyr::filter(date >= startDayFigure) %>%
     dplyr::filter(date <= endDayFigure) %>%
     dplyr::mutate(I = if_else(date < startDay, NA_real_, I))
+  #Dataframe of List 3
+  dfTemp3 <- dfResultsLong3 %>%
+    dplyr::filter(prefCode == i) %>%
+    dplyr::filter(date >= startDayFigure) %>%
+    dplyr::filter(date <= endDayFigure) %>%
+    dplyr::mutate(I = if_else(date < startDay, NA_real_, I))
   #Dataframe at Starting Date of Simulation
-  dfTemp3 <- dfTemp0 %>% 
+  dfTemp9 <- dfTemp0 %>% 
     filter(date == startDay) %>%
     mutate(labelDate = paste(
       str_sub(as.character(date), start = "1", end = "4"),
@@ -53,49 +59,59 @@ foreach(i = 0:numPref, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "s
   
   #Label for Each Case Scenario
   if(numCaseScenario == 1){
+    #
     labelLine0 <- "Observed numbers"
-    labelLine1 <- "Simulated numbers from SEIR model \nwith interregional mobility"
-    labelLine2 <- "Simulated numbers from SEIR model\nwithout interregional mobility"
+    labelLine1 <- "SEIR model \nwith interregional mobility"
+    labelLine2 <- "SEIR model\nwithout interregional mobility"
     colorLine <- c("#2f7ed8", "#f45b5b", "#25b086")
   }
   if(numCaseScenario == 2){
+    #
     labelLine0 <- "Observed numbers"
-    labelLine1 <- "Simulated numbers from SEIR model \nwith interregional mobility"
-    labelLine2 <- "Simulated numbers from SEIR model\nwithout interregional mobility"
+    labelLine1 <- "SEIR model \nwith interregional mobility"
+    labelLine2 <- "SEIR model\nwithout interregional mobility"
     colorLine <- c("#2f7ed8", "#f45b5b", "#25b086")
   }
   if(numCaseScenario == 3){
+    #
     labelLine0 <- "Observed numbers"
-    labelLine1 <- "SEIR model \nwith interregional mobility at 8pm"
-    labelLine2 <- "SEIR model\nwith interregional mobility at 2pm"
-    colorLine <- c("#2f7ed8", "#483d8b", "#f45b5b")
+    labelLine1 <- "SEIR model \nwith interregional mobility (8pm)"
+    labelLine2 <- "SEIR model\nwith interregional mobility (2pm)"
+    labelLine3 <- "SEIR model\nwithout interregional mobility"
+    colorLine <- c("#2f7ed8", "#483d8b", "#f45b5b", "#25b086")
   }
   if(numCaseScenario == 4){
+    #
     labelLine0 <- "Observed numbers"
-    labelLine1 <- "Simulated numbers from SEIR model \nwith interregional mobility except infectious persons"
-    labelLine2 <- "Simulated numbers from SEIR model\nwith interregional mobility"
-    colorLine <- c("#2f7ed8", "#483d8b", "#f45b5b")
+    labelLine1 <- "SEIR model \nwith interregional mobility except infectious persons"
+    labelLine2 <- "SEIR model\nwith interregional mobility"
+    labelLine3 <- "SEIR model\nwithout interregional mobility"
+    colorLine <- c("#2f7ed8", "#483d8b", "#f45b5b", "#25b086")
   }
   if(numCaseScenario == 5){
+    #
     labelLine0 <- "Observed numbers"
-    labelLine1 <- "Simulated numbers from SEIR model \nwith interregional mobility except Greater Tokyo Area"
-    labelLine2 <- "Simulated numbers from SEIR model\nwithout interregional mobility"
-    colorLine <- c("#2f7ed8", "#483d8b", "#f45b5b")
+    labelLine1 <- "SEIR model \nwith interregional mobility except Greater Tokyo Area"
+    labelLine2 <- "SEIR model\nwith interregional mobility"
+    labelLine3 <- "SEIR model\nwithout interregional mobility"
+    colorLine <- c("#2f7ed8", "#483d8b", "#f45b5b", "#25b086")
   }
   if(numCaseScenario == 6){
     #
     labelLine0 <- "Observed numbers"
-    labelLine1 <- "Simulated numbers from SEIR model \nwith interregional mobility except Greater Osaka Area"
-    labelLine2 <- "Simulated numbers from SEIR model\nwith interregional mobility"
-    colorLine <- c("#2f7ed8", "#483d8b", "#f45b5b")
+    labelLine1 <- "SEIR model \nwith interregional mobility except Greater Osaka Area"
+    labelLine2 <- "SEIR model\nwith interregional mobility"
+    labelLine3 <- "SEIR model\nwithout interregional mobility"
+    colorLine <- c("#2f7ed8", "#483d8b", "#f45b5b", "#25b086")
   }
   if(numCaseScenario == 7){
     #
     labelLine0 <- "Observed numbers"
-    labelLine1 <- "Simulated numbers from SEIR model \nwith interregional mobility except Tokyo and Osaka"
-    labelLine2 <- "Simulated numbers from SEIR model\nwith interregional mobility"
-    colorLine <- c("#2f7ed8", "#483d8b", "#f45b5b")
-  }
+    labelLine1 <- "SEIR model \nwith interregional mobility except Tokyo and Osaka"
+    labelLine2 <- "SEIR model\nwith interregional mobility"
+    labelLine3 <- "SEIR model\nwithout interregional mobility"
+    colorLine <- c("#2f7ed8", "#483d8b", "#f45b5b", "#25b086")
+  } 
   
   #Legend Display Option
   #optionLegend <- "top"
@@ -128,21 +144,42 @@ foreach(i = 0:numPref, .packages = c("scales", "ggplot2", "dplyr", "ggrepel", "s
   #ggplot2
   localeOriginal <- Sys.getlocale("LC_CTYPE")
   Sys.setlocale("LC_ALL","English")
-  listPlot[[i+1]] <- ggplot() +
-    geom_line(aes(x = date, y = I, color = labelLine0),
-              size = 1.5, 
-              linetype = "solid",
-              data = dfTemp0) +
-    geom_line(aes(x = date, y = I, color = labelLine2),
-              size = 1.6, 
-              linetype = "solid",
-              data = dfTemp2) +
-    geom_line(aes(x = date, y = I, color = labelLine1), 
-              size = 1.5, 
-              linetype = "solid",
-              data = dfTemp1) +
-    geom_point(aes(x = date, y = I), data = dfTemp3, size = 2, shape = 22, fill="transparent", stroke = 2, color = "red") +
-    geom_label_repel(aes(x = date, y = I, label = labelDate), data = dfTemp3, nudge_x = nudge_x_ggrepel, nudge_y = nudge_y_ggrepel, size = 8) +
+  if(numCaseScenario == 1 | numCaseScenario == 2 ){
+    ggtemp <- ggplot() +
+      geom_line(aes(x = date, y = I, color = labelLine0),
+                size = 1.5, 
+                linetype = "solid",
+                data = dfTemp0) +
+      geom_line(aes(x = date, y = I, color = labelLine2),
+                size = 1.6, 
+                linetype = "solid",
+                data = dfTemp2) +
+      geom_line(aes(x = date, y = I, color = labelLine1), 
+                size = 1.5, 
+                linetype = "solid",
+                data = dfTemp1)
+  } else{
+    ggtemp <- ggplot() +
+      geom_line(aes(x = date, y = I, color = labelLine0),
+                size = 1.5, 
+                linetype = "solid",
+                data = dfTemp0) +
+      geom_line(aes(x = date, y = I, color = labelLine3),
+                size = 1.6, 
+                linetype = "solid",
+                data = dfTemp3) +
+      geom_line(aes(x = date, y = I, color = labelLine2),
+                size = 1.6, 
+                linetype = "solid",
+                data = dfTemp2) +
+      geom_line(aes(x = date, y = I, color = labelLine1), 
+                size = 1.5, 
+                linetype = "solid",
+                data = dfTemp1)
+  }
+  listPlot[[i+1]] <- ggtemp + 
+    geom_point(aes(x = date, y = I), data = dfTemp9, size = 2, shape = 22, fill="transparent", stroke = 2, color = "red") +
+    geom_label_repel(aes(x = date, y = I, label = labelDate), data = dfTemp9, nudge_x = nudge_x_ggrepel, nudge_y = nudge_y_ggrepel, size = 8) +
     scale_color_manual(values = colorLine) + 
     scale_y_continuous(labels = comma_format(accuracy = 1)) +
     scale_x_date(date_breaks = x_date_breaks,

@@ -9,29 +9,29 @@ if(numCaseScenario == 1L){
 } 
 if(numCaseScenario == 2L){
   #Projection
-  startDay <- as.Date("2021-04-23", "%Y-%m-%d")
+  startDay <- as.Date("2021-04-25", "%Y-%m-%d")
 }
 if(numCaseScenario == 3L){
   #Projection at 8pm
-  startDay <- as.Date("2021-04-23", "%Y-%m-%d")
+  startDay <- as.Date("2021-04-25", "%Y-%m-%d")
 } 
 if(numCaseScenario == 4L){
   #Projection Infectious Individuals
-  startDay <- as.Date("2021-04-23", "%Y-%m-%d")
+  startDay <- as.Date("2021-04-25", "%Y-%m-%d")
 }
 if(numCaseScenario == 5L){
   #Projection Greater Tokyo Area
-  startDay <- as.Date("2021-04-23", "%Y-%m-%d")
+  startDay <- as.Date("2021-04-25", "%Y-%m-%d")
 } 
 if(numCaseScenario == 6L){
   #Projection Greater Osaka Area
-  startDay <- as.Date("2021-04-23", "%Y-%m-%d")
+  startDay <- as.Date("2021-04-25", "%Y-%m-%d")
 }
 if(numCaseScenario == 7L){
   #Projection Tokyo and Osaka
-  startDay <- as.Date("2021-04-23", "%Y-%m-%d")
+  startDay <- as.Date("2021-04-25", "%Y-%m-%d")
 }
 
 #
 endDay <- as.Date("2023-12-31", "%Y-%m-%d")
-dataDay <- as.Date("2021-05-09", "%Y-%m-%d") - (l_epsilon + l_gamma + 1)
+dataDay <- as.Date("2021-06-27", "%Y-%m-%d") - (l_epsilon + l_gamma + 1)
